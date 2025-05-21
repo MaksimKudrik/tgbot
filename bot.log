@@ -145,3 +145,419 @@
 2025-05-21 01:18:30,281 - aiogram.event - INFO - Update id=999787814 is handled. Duration 189 ms by bot id=7903997843
 2025-05-21 01:19:27,967 - aiogram.dispatcher - INFO - Polling stopped
 2025-05-21 01:19:28,219 - aiogram.dispatcher - INFO - Polling stopped for bot @gym00_bot id=7903997843 - 'gym'
+2025-05-21 20:41:25,758 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:41:25,775 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:41:25,775 - __main__ - INFO - Бот запущен...
+2025-05-21 20:41:25,776 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:41:26,112 - aiogram.dispatcher - INFO - Run polling for bot @gym00_bot id=7903997843 - 'gym'
+2025-05-21 20:41:26,198 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:41:26,199 - aiogram.dispatcher - WARNING - Sleep for 1.000000 seconds and try again... (tryings = 0, bot id = 7903997843)
+2025-05-21 20:41:30,274 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:41:30,275 - aiogram.dispatcher - WARNING - Sleep for 1.371736 seconds and try again... (tryings = 1, bot id = 7903997843)
+2025-05-21 20:41:31,737 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:41:31,737 - aiogram.dispatcher - WARNING - Sleep for 1.816475 seconds and try again... (tryings = 2, bot id = 7903997843)
+2025-05-21 20:41:36,649 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:41:36,649 - aiogram.dispatcher - WARNING - Sleep for 2.382764 seconds and try again... (tryings = 3, bot id = 7903997843)
+2025-05-21 20:41:39,108 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:41:39,109 - aiogram.dispatcher - WARNING - Sleep for 3.052033 seconds and try again... (tryings = 4, bot id = 7903997843)
+2025-05-21 20:41:42,237 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:41:42,237 - aiogram.dispatcher - WARNING - Sleep for 4.042159 seconds and try again... (tryings = 5, bot id = 7903997843)
+2025-05-21 20:41:46,357 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:41:46,358 - aiogram.dispatcher - WARNING - Sleep for 5.022590 seconds and try again... (tryings = 6, bot id = 7903997843)
+2025-05-21 20:41:51,454 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:41:51,454 - aiogram.dispatcher - WARNING - Sleep for 5.027689 seconds and try again... (tryings = 7, bot id = 7903997843)
+2025-05-21 20:41:56,561 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:41:56,561 - aiogram.dispatcher - WARNING - Sleep for 4.932230 seconds and try again... (tryings = 8, bot id = 7903997843)
+2025-05-21 20:42:01,567 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:42:01,567 - aiogram.dispatcher - WARNING - Sleep for 5.117519 seconds and try again... (tryings = 9, bot id = 7903997843)
+2025-05-21 20:42:06,759 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:42:06,759 - aiogram.dispatcher - WARNING - Sleep for 5.038999 seconds and try again... (tryings = 10, bot id = 7903997843)
+2025-05-21 20:42:11,870 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:42:11,870 - aiogram.dispatcher - WARNING - Sleep for 4.882676 seconds and try again... (tryings = 11, bot id = 7903997843)
+2025-05-21 20:42:16,830 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:42:16,830 - aiogram.dispatcher - WARNING - Sleep for 4.826997 seconds and try again... (tryings = 12, bot id = 7903997843)
+2025-05-21 20:42:21,731 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:42:21,732 - aiogram.dispatcher - WARNING - Sleep for 5.177784 seconds and try again... (tryings = 13, bot id = 7903997843)
+2025-05-21 20:42:26,987 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:42:26,987 - aiogram.dispatcher - WARNING - Sleep for 4.923156 seconds and try again... (tryings = 14, bot id = 7903997843)
+2025-05-21 20:42:31,982 - aiogram.dispatcher - ERROR - Failed to fetch updates - TelegramConflictError: Telegram server says - Conflict: can't use getUpdates method while webhook is active; use deleteWebhook to delete the webhook first
+2025-05-21 20:42:31,982 - aiogram.dispatcher - WARNING - Sleep for 4.999682 seconds and try again... (tryings = 15, bot id = 7903997843)
+2025-05-21 20:42:32,420 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:42:32,672 - aiogram.dispatcher - INFO - Polling stopped for bot @gym00_bot id=7903997843 - 'gym'
+2025-05-21 20:42:36,340 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:42:36,343 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:42:36,343 - __main__ - INFO - Бот запущен...
+2025-05-21 20:42:36,343 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:42:36,597 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:42:41,774 - __main__ - INFO - Пользователь 6351700219 начал ввод максимальных весов
+2025-05-21 20:42:41,774 - aiogram.event - INFO - Update id=912013555 is handled. Duration 643 ms by bot id=8185550020
+2025-05-21 20:42:45,254 - __main__ - INFO - Пользователь 6351700219 ввёл жим лёжа: 80.0 кг
+2025-05-21 20:42:45,254 - aiogram.event - INFO - Update id=912013556 is handled. Duration 114 ms by bot id=8185550020
+2025-05-21 20:42:48,129 - __main__ - INFO - Пользователь 6351700219 ввёл присед: 110.0 кг
+2025-05-21 20:42:48,130 - aiogram.event - INFO - Update id=912013557 is handled. Duration 106 ms by bot id=8185550020
+2025-05-21 20:42:51,060 - __main__ - INFO - Данные пользователя 6351700219 сохранены: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:42:51,242 - __main__ - INFO - Пользователь 6351700219 завершил ввод весов: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:42:51,242 - aiogram.event - INFO - Update id=912013558 is handled. Duration 190 ms by bot id=8185550020
+2025-05-21 20:42:56,308 - __main__ - INFO - Проверка весов для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:42:56,447 - __main__ - INFO - Пользователь 6351700219 запросил текущие веса: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:42:56,447 - aiogram.event - INFO - Update id=912013559 is handled. Duration 143 ms by bot id=8185550020
+2025-05-21 20:42:59,177 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:42:59,177 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:42:59,565 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:42:59,565 - aiogram.event - INFO - Update id=912013560 is handled. Duration 390 ms by bot id=8185550020
+2025-05-21 20:44:55,090 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:44:55,344 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:44:58,778 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:44:58,781 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:44:58,781 - __main__ - INFO - Бот запущен...
+2025-05-21 20:44:58,781 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:44:59,084 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:44:59,437 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:44:59,437 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:45:00,035 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:45:00,036 - aiogram.event - INFO - Update id=912013561 is handled. Duration 599 ms by bot id=8185550020
+2025-05-21 20:45:59,170 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:45:59,423 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:46:02,863 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:46:02,866 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:46:02,866 - __main__ - INFO - Бот запущен...
+2025-05-21 20:46:02,866 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:46:03,112 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:46:05,329 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:46:05,329 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:46:05,941 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:46:05,941 - aiogram.event - INFO - Update id=912013562 is handled. Duration 614 ms by bot id=8185550020
+2025-05-21 20:46:35,949 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:46:36,203 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:46:39,710 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:46:39,712 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:46:39,712 - __main__ - INFO - Бот запущен...
+2025-05-21 20:46:39,712 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:46:39,995 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:46:40,077 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:46:40,077 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:46:40,682 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:46:40,682 - aiogram.event - INFO - Update id=912013563 is handled. Duration 606 ms by bot id=8185550020
+2025-05-21 20:47:19,204 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:47:19,455 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:47:22,567 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:47:22,569 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:47:22,569 - __main__ - INFO - Бот запущен...
+2025-05-21 20:47:22,569 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:47:22,815 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:47:22,897 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:47:22,897 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:47:23,536 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:47:23,536 - aiogram.event - INFO - Update id=912013564 is handled. Duration 640 ms by bot id=8185550020
+2025-05-21 20:47:57,011 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:47:57,263 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:48:00,183 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:48:00,185 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:48:00,186 - __main__ - INFO - Бот запущен...
+2025-05-21 20:48:00,186 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:48:00,435 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:48:00,751 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:48:00,751 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:48:01,533 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:48:01,533 - aiogram.event - INFO - Update id=912013565 is handled. Duration 783 ms by bot id=8185550020
+2025-05-21 20:48:36,506 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:48:36,506 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:48:36,717 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 2
+2025-05-21 20:48:36,717 - aiogram.event - INFO - Update id=912013566 is handled. Duration 213 ms by bot id=8185550020
+2025-05-21 20:48:42,767 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:48:42,768 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:48:43,042 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 6
+2025-05-21 20:48:43,043 - aiogram.event - INFO - Update id=912013567 is handled. Duration 276 ms by bot id=8185550020
+2025-05-21 20:52:11,763 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:52:12,016 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:52:15,643 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:52:15,645 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:52:15,645 - __main__ - INFO - Бот запущен...
+2025-05-21 20:52:15,645 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:52:15,980 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:52:16,852 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:52:16,853 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:52:17,487 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:52:17,487 - aiogram.event - INFO - Update id=912013568 is handled. Duration 635 ms by bot id=8185550020
+2025-05-21 20:53:35,091 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:53:35,350 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:53:38,114 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:53:38,116 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:53:38,116 - __main__ - INFO - Бот запущен...
+2025-05-21 20:53:38,116 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:53:38,453 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:53:55,481 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:53:55,733 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:53:58,856 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:53:58,859 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:53:58,859 - __main__ - INFO - Бот запущен...
+2025-05-21 20:53:58,859 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:53:59,129 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:53:59,707 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:53:59,707 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:54:00,420 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:54:00,421 - aiogram.event - INFO - Update id=912013569 is handled. Duration 715 ms by bot id=8185550020
+2025-05-21 20:55:10,798 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:55:10,798 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:55:11,040 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:55:11,040 - aiogram.event - INFO - Update id=912013570 is handled. Duration 243 ms by bot id=8185550020
+2025-05-21 20:55:36,474 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:55:36,726 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:55:39,730 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:55:39,732 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:55:39,732 - __main__ - INFO - Бот запущен...
+2025-05-21 20:55:39,732 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:55:40,107 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:55:40,212 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:55:40,212 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:55:40,906 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:55:40,907 - aiogram.event - INFO - Update id=912013571 is handled. Duration 696 ms by bot id=8185550020
+2025-05-21 20:55:59,817 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:55:59,817 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:56:00,072 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 2
+2025-05-21 20:56:00,072 - aiogram.event - INFO - Update id=912013572 is handled. Duration 257 ms by bot id=8185550020
+2025-05-21 20:57:28,031 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:57:28,284 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:57:31,148 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:57:31,151 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:57:31,151 - __main__ - INFO - Бот запущен...
+2025-05-21 20:57:31,151 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:57:31,508 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:57:33,304 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:57:33,304 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:57:34,092 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:57:34,093 - aiogram.event - INFO - Update id=912013573 is handled. Duration 789 ms by bot id=8185550020
+2025-05-21 20:59:15,836 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 20:59:16,088 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:59:19,104 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 20:59:19,107 - __main__ - INFO - База данных инициализирована
+2025-05-21 20:59:19,107 - __main__ - INFO - Бот запущен...
+2025-05-21 20:59:19,107 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 20:59:19,453 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 20:59:19,551 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:59:19,551 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 20:59:20,304 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 20:59:20,304 - aiogram.event - INFO - Update id=912013574 is handled. Duration 754 ms by bot id=8185550020
+2025-05-21 21:00:19,475 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:00:19,730 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:00:22,756 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:00:22,758 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:00:22,758 - __main__ - INFO - Бот запущен...
+2025-05-21 21:00:22,758 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:00:23,111 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:00:23,202 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:00:23,202 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:00:24,100 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:00:24,100 - aiogram.event - INFO - Update id=912013575 is handled. Duration 899 ms by bot id=8185550020
+2025-05-21 21:01:21,827 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:01:22,079 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:01:25,096 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:01:25,099 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:01:25,099 - __main__ - INFO - Бот запущен...
+2025-05-21 21:01:25,099 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:01:25,434 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:01:25,987 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:01:25,987 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:01:26,611 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:01:26,611 - aiogram.event - INFO - Update id=912013576 is handled. Duration 625 ms by bot id=8185550020
+2025-05-21 21:01:48,110 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:01:48,366 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:01:51,788 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:01:51,791 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:01:51,791 - __main__ - INFO - Бот запущен...
+2025-05-21 21:01:51,791 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:01:52,130 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:01:52,492 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:01:52,493 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:01:53,177 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:01:53,177 - aiogram.event - INFO - Update id=912013577 is handled. Duration 686 ms by bot id=8185550020
+2025-05-21 21:02:07,808 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:02:08,062 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:02:10,823 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:02:10,826 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:02:10,826 - __main__ - INFO - Бот запущен...
+2025-05-21 21:02:10,827 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:02:11,082 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:02:12,396 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:02:12,396 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:02:13,119 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:02:13,119 - aiogram.event - INFO - Update id=912013578 is handled. Duration 724 ms by bot id=8185550020
+2025-05-21 21:02:44,654 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:02:44,915 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:02:48,868 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:02:48,870 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:02:48,870 - __main__ - INFO - Бот запущен...
+2025-05-21 21:02:48,870 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:02:49,216 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:02:51,183 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:02:51,183 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:02:51,856 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:02:51,856 - aiogram.event - INFO - Update id=912013579 is handled. Duration 674 ms by bot id=8185550020
+2025-05-21 21:03:09,754 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:03:10,007 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:03:13,281 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:03:13,283 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:03:13,283 - __main__ - INFO - Бот запущен...
+2025-05-21 21:03:13,283 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:03:13,534 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:03:13,623 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:03:13,623 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:03:14,226 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:03:14,226 - aiogram.event - INFO - Update id=912013580 is handled. Duration 604 ms by bot id=8185550020
+2025-05-21 21:03:33,389 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:03:33,643 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:03:36,995 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:03:36,998 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:03:36,998 - __main__ - INFO - Бот запущен...
+2025-05-21 21:03:36,999 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:03:37,260 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:03:38,377 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:03:38,378 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:03:39,023 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:03:39,023 - aiogram.event - INFO - Update id=912013581 is handled. Duration 648 ms by bot id=8185550020
+2025-05-21 21:03:51,960 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:03:52,212 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:03:55,399 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:03:55,401 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:03:55,401 - __main__ - INFO - Бот запущен...
+2025-05-21 21:03:55,401 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:03:55,721 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:03:55,816 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:03:55,816 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:03:56,424 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:03:56,424 - aiogram.event - INFO - Update id=912013582 is handled. Duration 609 ms by bot id=8185550020
+2025-05-21 21:04:12,533 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:04:12,794 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:04:17,155 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:04:17,157 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:04:17,157 - __main__ - INFO - Бот запущен...
+2025-05-21 21:04:17,157 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:04:17,385 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:04:17,597 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:04:17,598 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:04:18,326 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:04:18,327 - aiogram.event - INFO - Update id=912013583 is handled. Duration 731 ms by bot id=8185550020
+2025-05-21 21:04:42,075 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:04:42,333 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:04:45,667 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:04:45,670 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:04:45,670 - __main__ - INFO - Бот запущен...
+2025-05-21 21:04:45,670 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:04:46,021 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:04:46,110 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:04:46,110 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:04:46,754 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:04:46,754 - aiogram.event - INFO - Update id=912013584 is handled. Duration 645 ms by bot id=8185550020
+2025-05-21 21:04:59,726 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:04:59,977 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:05:03,371 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:05:03,374 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:05:03,374 - __main__ - INFO - Бот запущен...
+2025-05-21 21:05:03,374 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:05:03,609 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:05:03,690 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:05:03,691 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:05:04,451 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:05:04,451 - aiogram.event - INFO - Update id=912013585 is handled. Duration 761 ms by bot id=8185550020
+2025-05-21 21:05:17,892 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:05:18,146 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:05:21,221 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:05:21,223 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:05:21,223 - __main__ - INFO - Бот запущен...
+2025-05-21 21:05:21,223 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:05:21,461 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:05:21,541 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:05:21,541 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:05:22,289 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:05:22,289 - aiogram.event - INFO - Update id=912013586 is handled. Duration 749 ms by bot id=8185550020
+2025-05-21 21:05:36,523 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:05:36,777 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:05:40,220 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:05:40,223 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:05:40,223 - __main__ - INFO - Бот запущен...
+2025-05-21 21:05:40,223 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:05:40,554 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:05:40,641 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:05:40,641 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:05:41,394 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:05:41,394 - aiogram.event - INFO - Update id=912013587 is handled. Duration 754 ms by bot id=8185550020
+2025-05-21 21:05:53,265 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:05:53,519 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:05:57,037 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:05:57,040 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:05:57,040 - __main__ - INFO - Бот запущен...
+2025-05-21 21:05:57,040 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:05:57,286 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:05:57,372 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:05:57,372 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:05:58,001 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:05:58,001 - aiogram.event - INFO - Update id=912013588 is handled. Duration 629 ms by bot id=8185550020
+2025-05-21 21:06:11,981 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:06:12,234 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:06:15,662 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:06:15,664 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:06:15,664 - __main__ - INFO - Бот запущен...
+2025-05-21 21:06:15,664 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:06:16,004 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:06:16,087 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:06:16,087 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:06:16,710 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:06:16,710 - aiogram.event - INFO - Update id=912013589 is handled. Duration 624 ms by bot id=8185550020
+2025-05-21 21:07:06,198 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:07:06,198 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:07:06,530 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 2
+2025-05-21 21:07:06,530 - aiogram.event - INFO - Update id=912013590 is handled. Duration 333 ms by bot id=8185550020
+2025-05-21 21:07:27,569 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:07:27,821 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:07:31,188 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:07:31,192 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:07:31,193 - __main__ - INFO - Бот запущен...
+2025-05-21 21:07:31,193 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:07:31,551 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:07:31,726 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:07:31,726 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:07:32,854 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:07:32,854 - aiogram.event - INFO - Update id=912013591 is handled. Duration 1130 ms by bot id=8185550020
+2025-05-21 21:07:41,265 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:07:41,518 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:07:44,469 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:07:44,472 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:07:44,472 - __main__ - INFO - Бот запущен...
+2025-05-21 21:07:44,472 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:07:44,835 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:07:44,931 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:07:44,931 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:07:45,561 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:07:45,562 - aiogram.event - INFO - Update id=912013592 is handled. Duration 632 ms by bot id=8185550020
+2025-05-21 21:07:45,619 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:07:45,619 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:07:45,841 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:07:45,842 - aiogram.event - INFO - Update id=912013593 is handled. Duration 223 ms by bot id=8185550020
+2025-05-21 21:08:00,460 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:08:00,718 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:08:05,378 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:08:05,381 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:08:05,381 - __main__ - INFO - Бот запущен...
+2025-05-21 21:08:05,381 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:08:05,731 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:08:05,821 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:08:05,821 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:08:06,182 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:08:06,182 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:08:06,437 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:08:06,437 - aiogram.event - INFO - Update id=912013594 is handled. Duration 617 ms by bot id=8185550020
+2025-05-21 21:08:06,561 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:08:06,561 - aiogram.event - INFO - Update id=912013595 is handled. Duration 380 ms by bot id=8185550020
+2025-05-21 21:08:15,977 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:08:16,230 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:08:19,124 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:08:19,127 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:08:19,128 - __main__ - INFO - Бот запущен...
+2025-05-21 21:08:19,128 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:08:19,370 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:08:19,587 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:08:19,587 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:08:20,250 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:08:20,250 - aiogram.event - INFO - Update id=912013596 is handled. Duration 663 ms by bot id=8185550020
+2025-05-21 21:08:30,841 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:08:31,095 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
