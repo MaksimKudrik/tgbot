@@ -561,3 +561,139 @@
 2025-05-21 21:08:20,250 - aiogram.event - INFO - Update id=912013596 is handled. Duration 663 ms by bot id=8185550020
 2025-05-21 21:08:30,841 - aiogram.dispatcher - INFO - Polling stopped
 2025-05-21 21:08:31,095 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:08:34,197 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:08:34,200 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:08:34,200 - __main__ - INFO - Бот запущен...
+2025-05-21 21:08:34,200 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:08:34,448 - aiogram.dispatcher - INFO - Run polling for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:08:34,538 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:08:34,538 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:08:35,137 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:08:35,137 - aiogram.event - INFO - Update id=912013597 is handled. Duration 600 ms by bot id=8185550020
+2025-05-21 21:08:47,468 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:08:47,469 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:08:47,821 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 2
+2025-05-21 21:08:47,821 - aiogram.event - INFO - Update id=912013598 is handled. Duration 353 ms by bot id=8185550020
+2025-05-21 21:09:02,167 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:09:02,167 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:09:02,499 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 3
+2025-05-21 21:09:02,499 - aiogram.event - INFO - Update id=912013599 is handled. Duration 333 ms by bot id=8185550020
+2025-05-21 21:09:12,684 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:09:12,684 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:09:12,908 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 4
+2025-05-21 21:09:12,908 - aiogram.event - INFO - Update id=912013600 is handled. Duration 225 ms by bot id=8185550020
+2025-05-21 21:09:17,974 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:09:17,974 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 150.0}
+2025-05-21 21:09:18,242 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 5
+2025-05-21 21:09:18,242 - aiogram.event - INFO - Update id=912013601 is handled. Duration 270 ms by bot id=8185550020
+2025-05-21 21:12:23,021 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:12:23,274 - aiogram.dispatcher - INFO - Polling stopped for bot @wefkwefjieifwifiweijfiwbot id=8185550020 - '12'
+2025-05-21 21:15:39,307 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:15:39,319 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:15:39,319 - __main__ - INFO - Бот запущен...
+2025-05-21 21:15:39,319 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:15:42,010 - aiogram.dispatcher - INFO - Run polling for bot @gymprog_bot id=7639243973 - 'gym'
+2025-05-21 21:15:57,712 - __main__ - INFO - Пользователь 634966084 начал ввод максимальных весов
+2025-05-21 21:15:57,712 - aiogram.event - INFO - Update id=677144201 is handled. Duration 767 ms by bot id=7639243973
+2025-05-21 21:16:08,168 - __main__ - INFO - Пользователь 634966084 ввёл жим лёжа: 125.0 кг
+2025-05-21 21:16:08,168 - aiogram.event - INFO - Update id=677144202 is handled. Duration 103 ms by bot id=7639243973
+2025-05-21 21:16:12,198 - __main__ - INFO - Пользователь 6351700219 начал ввод максимальных весов
+2025-05-21 21:16:12,199 - aiogram.event - INFO - Update id=677144203 is handled. Duration 261 ms by bot id=7639243973
+2025-05-21 21:16:14,766 - __main__ - INFO - Пользователь 6351700219 ввёл жим лёжа: 1.0 кг
+2025-05-21 21:16:14,766 - aiogram.event - INFO - Update id=677144204 is handled. Duration 107 ms by bot id=7639243973
+2025-05-21 21:16:16,228 - __main__ - INFO - Пользователь 6351700219 ввёл присед: 1.0 кг
+2025-05-21 21:16:16,228 - aiogram.event - INFO - Update id=677144205 is handled. Duration 118 ms by bot id=7639243973
+2025-05-21 21:16:17,723 - __main__ - INFO - Данные пользователя 6351700219 сохранены: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-21 21:16:17,869 - __main__ - INFO - Пользователь 6351700219 завершил ввод весов: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-21 21:16:17,869 - aiogram.event - INFO - Update id=677144206 is handled. Duration 153 ms by bot id=7639243973
+2025-05-21 21:16:18,644 - __main__ - INFO - Пользователь 634966084 ввёл присед: 130.0 кг
+2025-05-21 21:16:18,644 - aiogram.event - INFO - Update id=677144207 is handled. Duration 204 ms by bot id=7639243973
+2025-05-21 21:16:19,164 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-21 21:16:19,165 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-21 21:16:19,423 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 3
+2025-05-21 21:16:19,424 - aiogram.event - INFO - Update id=677144208 is handled. Duration 263 ms by bot id=7639243973
+2025-05-21 21:16:20,447 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-21 21:16:20,447 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-21 21:16:20,728 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:16:20,728 - aiogram.event - INFO - Update id=677144209 is handled. Duration 282 ms by bot id=7639243973
+2025-05-21 21:16:24,411 - __main__ - INFO - Данные пользователя 634966084 сохранены: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:16:24,556 - __main__ - INFO - Пользователь 634966084 завершил ввод весов: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:16:24,556 - aiogram.event - INFO - Update id=677144210 is handled. Duration 256 ms by bot id=7639243973
+2025-05-21 21:16:34,120 - __main__ - INFO - Пользователь 6351700219 запросил выбор недели
+2025-05-21 21:16:34,120 - aiogram.event - INFO - Update id=677144211 is handled. Duration 111 ms by bot id=7639243973
+2025-05-21 21:16:34,283 - __main__ - INFO - Извлечены данные для пользователя 634966084: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:16:34,283 - __main__ - INFO - Максимальные веса для пользователя 634966084: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:16:34,893 - __main__ - INFO - Пользователь 634966084 запросил полный план тренировок
+2025-05-21 21:16:34,893 - aiogram.event - INFO - Update id=677144212 is handled. Duration 611 ms by bot id=7639243973
+2025-05-21 21:16:35,768 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-21 21:16:35,768 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-21 21:16:36,088 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-21 21:16:36,089 - aiogram.event - INFO - Update id=677144213 is handled. Duration 323 ms by bot id=7639243973
+2025-05-21 21:16:40,985 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-21 21:16:40,986 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-21 21:16:41,633 - __main__ - INFO - Пользователь 6351700219 запросил полный план тренировок
+2025-05-21 21:16:41,633 - aiogram.event - INFO - Update id=677144214 is handled. Duration 651 ms by bot id=7639243973
+2025-05-21 21:17:00,837 - __main__ - INFO - Извлечены данные для пользователя 634966084: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:17:00,837 - __main__ - INFO - Максимальные веса для пользователя 634966084: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:17:01,105 - __main__ - INFO - Пользователь 634966084 выбрал неделю 1
+2025-05-21 21:17:01,105 - aiogram.event - INFO - Update id=677144215 is handled. Duration 268 ms by bot id=7639243973
+2025-05-21 21:17:10,151 - __main__ - INFO - Извлечены данные для пользователя 634966084: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:17:10,151 - __main__ - INFO - Максимальные веса для пользователя 634966084: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:17:10,500 - __main__ - INFO - Пользователь 634966084 выбрал неделю 2
+2025-05-21 21:17:10,500 - aiogram.event - INFO - Update id=677144216 is handled. Duration 351 ms by bot id=7639243973
+2025-05-21 21:17:12,486 - __main__ - INFO - Извлечены данные для пользователя 634966084: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:17:12,486 - __main__ - INFO - Максимальные веса для пользователя 634966084: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:17:12,783 - __main__ - INFO - Пользователь 634966084 выбрал неделю 3
+2025-05-21 21:17:12,783 - aiogram.event - INFO - Update id=677144217 is handled. Duration 299 ms by bot id=7639243973
+2025-05-21 21:17:53,553 - __main__ - INFO - Пользователь 634966084 запросил помощь
+2025-05-21 21:17:53,553 - aiogram.event - INFO - Update id=677144218 is handled. Duration 136 ms by bot id=7639243973
+2025-05-21 21:18:03,356 - __main__ - INFO - Проверка весов для пользователя 634966084: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:18:03,459 - __main__ - INFO - Пользователь 634966084 запросил текущие веса: {'bench_press': 125.0, 'squat': 130.0, 'deadlift': 155.0}
+2025-05-21 21:18:03,460 - aiogram.event - INFO - Update id=677144219 is handled. Duration 105 ms by bot id=7639243973
+2025-05-21 21:24:18,561 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-21 21:24:18,822 - aiogram.dispatcher - INFO - Polling stopped for bot @gymprog_bot id=7639243973 - 'gym'
+2025-05-21 21:25:43,783 - __main__ - INFO - CSV данные успешно загружены
+2025-05-21 21:25:43,785 - __main__ - INFO - База данных инициализирована
+2025-05-21 21:25:43,785 - __main__ - INFO - Бот запущен...
+2025-05-21 21:25:43,785 - aiogram.dispatcher - INFO - Start polling
+2025-05-21 21:25:44,132 - aiogram.dispatcher - INFO - Run polling for bot @gymprog_bot id=7639243973 - 'gym'
+2025-05-21 21:26:14,710 - __main__ - INFO - Пользователь 7657376229 начал ввод максимальных весов
+2025-05-21 21:26:14,710 - aiogram.event - INFO - Update id=677144220 is handled. Duration 654 ms by bot id=7639243973
+2025-05-21 21:27:11,185 - __main__ - INFO - Пользователь 7657376229 ввёл жим лёжа: 10.0 кг
+2025-05-21 21:27:11,185 - aiogram.event - INFO - Update id=677144221 is handled. Duration 175 ms by bot id=7639243973
+2025-05-21 21:27:28,542 - __main__ - INFO - Пользователь 7657376229 ввёл присед: 5.0 кг
+2025-05-21 21:27:28,543 - aiogram.event - INFO - Update id=677144222 is handled. Duration 230 ms by bot id=7639243973
+2025-05-21 21:27:41,106 - __main__ - INFO - Данные пользователя 7657376229 сохранены: {'bench_press': 10.0, 'squat': 5.0, 'deadlift': 20.0}
+2025-05-21 21:27:41,300 - __main__ - INFO - Пользователь 7657376229 завершил ввод весов: {'bench_press': 10.0, 'squat': 5.0, 'deadlift': 20.0}
+2025-05-21 21:27:41,300 - aiogram.event - INFO - Update id=677144223 is handled. Duration 202 ms by bot id=7639243973
+2025-05-21 21:28:41,884 - __main__ - INFO - Извлечены данные для пользователя 7657376229: {'bench_press': 10.0, 'squat': 5.0, 'deadlift': 20.0}
+2025-05-21 21:28:41,884 - __main__ - INFO - Максимальные веса для пользователя 7657376229: {'bench_press': 10.0, 'squat': 5.0, 'deadlift': 20.0}
+2025-05-21 21:28:42,124 - __main__ - INFO - Пользователь 7657376229 выбрал неделю 1
+2025-05-21 21:28:42,124 - aiogram.event - INFO - Update id=677144224 is handled. Duration 242 ms by bot id=7639243973
+2025-05-22 00:23:52,890 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-22 00:23:53,190 - aiogram.dispatcher - INFO - Polling stopped for bot @gymprog_bot id=7639243973 - 'gym'
+2025-05-22 00:24:01,310 - __main__ - INFO - CSV данные успешно загружены
+2025-05-22 00:24:01,319 - __main__ - INFO - База данных инициализирована
+2025-05-22 00:24:01,319 - __main__ - INFO - Бот запущен...
+2025-05-22 00:24:01,319 - aiogram.dispatcher - INFO - Start polling
+2025-05-22 00:24:01,673 - aiogram.dispatcher - INFO - Run polling for bot @gymprog_bot id=7639243973 - 'gym'
+2025-05-22 00:24:17,348 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-22 00:24:17,348 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 1.0, 'squat': 1.0, 'deadlift': 1.0}
+2025-05-22 00:24:17,933 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-22 00:24:17,934 - aiogram.event - INFO - Update id=677144225 is handled. Duration 587 ms by bot id=7639243973
+2025-05-22 00:24:39,177 - __main__ - INFO - Данные пользователя 6351700219 очищены
+2025-05-22 00:24:39,277 - __main__ - INFO - Пользователь 6351700219 сбросил максимальные веса
+2025-05-22 00:24:39,277 - aiogram.event - INFO - Update id=677144226 is handled. Duration 110 ms by bot id=7639243973
+2025-05-22 00:24:43,722 - __main__ - INFO - Пользователь 6351700219 ввёл жим лёжа: 80.0 кг
+2025-05-22 00:24:43,722 - aiogram.event - INFO - Update id=677144227 is handled. Duration 172 ms by bot id=7639243973
+2025-05-22 00:24:48,396 - __main__ - INFO - Пользователь 6351700219 ввёл присед: 110.0 кг
+2025-05-22 00:24:48,397 - aiogram.event - INFO - Update id=677144228 is handled. Duration 113 ms by bot id=7639243973
+2025-05-22 00:24:51,729 - __main__ - INFO - Данные пользователя 6351700219 сохранены: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 140.0}
+2025-05-22 00:24:51,830 - __main__ - INFO - Пользователь 6351700219 завершил ввод весов: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 140.0}
+2025-05-22 00:24:51,830 - aiogram.event - INFO - Update id=677144229 is handled. Duration 110 ms by bot id=7639243973
+2025-05-22 00:24:54,584 - __main__ - INFO - Извлечены данные для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 140.0}
+2025-05-22 00:24:54,584 - __main__ - INFO - Максимальные веса для пользователя 6351700219: {'bench_press': 80.0, 'squat': 110.0, 'deadlift': 140.0}
+2025-05-22 00:24:54,823 - __main__ - INFO - Пользователь 6351700219 выбрал неделю 1
+2025-05-22 00:24:54,823 - aiogram.event - INFO - Update id=677144230 is handled. Duration 240 ms by bot id=7639243973
+2025-05-22 00:26:17,439 - aiogram.dispatcher - INFO - Polling stopped
+2025-05-22 00:26:17,691 - aiogram.dispatcher - INFO - Polling stopped for bot @gymprog_bot id=7639243973 - 'gym'
