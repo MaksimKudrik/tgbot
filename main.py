@@ -7,10 +7,11 @@ from dotenv import load_dotenv
 import pandas as pd
 from aiogram import Bot, Dispatcher, Router
 from aiogram.filters import Command, CommandStart
-from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.types import CallbackQuery
 
 # Настройка логирования
 logging.basicConfig(
@@ -108,21 +109,6 @@ def clear_user_data(user_id: int) -> None:
         logger.error(f"Ошибка при очистке данных пользователя {user_id}: {e}")
         raise
 
-# Создание инлайн-клавиатуры для выбора недели
-def get_week_keyboard() -> InlineKeyboardMarkup:
-    """Создаёт инлайн-клавиатуру с кнопками для выбора недели (2x4)."""
-    keyboard = InlineKeyboardMarkup(inline_keyboard=[])
-    row = []
-    for i in range(1, 9):
-        button = InlineKeyboardButton(text=f"Неделя {i}", callback_data=f"week_{i}")
-        row.append(button)
-        if len(row) == 2:  # 2 кнопки в строке
-            keyboard.inline_keyboard.append(row)
-            row = []
-    if row:
-        keyboard.inline_keyboard.append(row)
-    return keyboard
-
 # Создание reply-клавиатуры для команд
 def get_reply_command_keyboard() -> ReplyKeyboardMarkup:
     """Создаёт reply-клавиатуру с кнопками для команд."""
@@ -137,11 +123,34 @@ def get_reply_command_keyboard() -> ReplyKeyboardMarkup:
     )
     return keyboard
 
-# Определение машины состояний для ввода максимальных весов
+# Создание reply-клавиатуры с днями и кнопкой "Назад"
+def get_days_only_keyboard() -> ReplyKeyboardMarkup:
+    """Создаёт reply-клавиатуру с кнопками для дней и кнопкой 'Назад'."""
+    keyboard = ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="понедельник"), KeyboardButton(text="среда"), KeyboardButton(text="пятница")],
+            [KeyboardButton(text="Назад")]
+        ],
+        resize_keyboard=True,
+        persistent=True
+    )
+    return keyboard
+
+# Создание inline-клавиатуры для выбора недели
+def get_week_keyboard() -> InlineKeyboardMarkup:
+    """Создаёт inline-клавиатуру с кнопками для выбора недели."""
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text=str(i), callback_data=f"week_{i}") for i in range(1, 5)],
+        [InlineKeyboardButton(text=str(i), callback_data=f"week_{i}") for i in range(5, 9)]
+    ])
+    return keyboard
+
+# Определение машины состояний для ввода максимальных весов и выбора недели
 class MaxLiftForm(StatesGroup):
     bench_press = State()
     squat = State()
     deadlift = State()
+    week_selection = State()
 
 # Данные из файла в формате CSV
 CSV_DATA = """упражнения,интенсивность,подходы х повторения,день,неделя
@@ -342,43 +351,27 @@ except Exception as e:
 # Маппинг упражнений для расчёта весов
 EXERCISE_MAPPING = {
     "жим лёжа": {"main_lift": "bench_press", "scale": 1.0, "min_weight": 20.0, "max_weight": 500.0, "increment": 2.5},
-    "присед со штангой": {"main_lift": "squat", "scale": 1.0, "min_weight": 20.0, "max_weight": 600.0,
-                          "increment": 2.5},
-    "классическая тяга": {"main_lift": "deadlift", "scale": 1.0, "min_weight": 20.0, "max_weight": 700.0,
-                          "increment": 2.5},
-    "тяга вертикального блока": {"main_lift": "bench_press", "scale": 0.55, "min_weight": 10.0, "max_weight": 120.0,
-                                 "increment": 2.5},
-    "тяга горизонтального блока": {"main_lift": "bench_press", "scale": 0.55, "min_weight": 10.0, "max_weight": 120.0,
-                                   "increment": 2.5},
-    "шраги с гантелями": {"main_lift": "deadlift", "scale": 0.20, "min_weight": 4.0, "max_weight": 80.0,
-                          "increment": 2.0},
+    "присед со штангой": {"main_lift": "squat", "scale": 1.0, "min_weight": 20.0, "max_weight": 600.0, "increment": 2.5},
+    "классическая тяга": {"main_lift": "deadlift", "scale": 1.0, "min_weight": 20.0, "max_weight": 700.0, "increment": 2.5},
+    "тяга вертикального блока": {"main_lift": "bench_press", "scale": 0.55, "min_weight": 10.0, "max_weight": 120.0, "increment": 2.5},
+    "тяга горизонтального блока": {"main_lift": "bench_press", "scale": 0.55, "min_weight": 10.0, "max_weight": 120.0, "increment": 2.5},
+    "шраги с гантелями": {"main_lift": "deadlift", "scale": 0.20, "min_weight": 4.0, "max_weight": 80.0, "increment": 2.0},
     "косичка": {"main_lift": "bench_press", "scale": 0.50, "min_weight": 5.0, "max_weight": 50.0, "increment": 2.5},
-    "французский жим лёжа": {"main_lift": "bench_press", "scale": 0.25, "min_weight": 10.0, "max_weight": 60.0,
-                             "increment": 2.5},
-    "сгибания на бицепс ez грифа": {"main_lift": "bench_press", "scale": 0.35, "min_weight": 5.0, "max_weight": 50.0,
-                                    "increment": 2.5},
-    "подъем на бицепс с прямым грифом": {"main_lift": "bench_press", "scale": 0.3, "min_weight": 10.0,
-                                         "max_weight": 50.0, "increment": 2.5},
+    "французский жим лёжа": {"main_lift": "bench_press", "scale": 0.25, "min_weight": 10.0, "max_weight": 60.0, "increment": 2.5},
+    "сгибания на бицепс ez грифа": {"main_lift": "bench_press", "scale": 0.35, "min_weight": 5.0, "max_weight": 50.0, "increment": 2.5},
+    "подъем на бицепс с прямым грифом": {"main_lift": "bench_press", "scale": 0.3, "min_weight": 10.0, "max_weight": 50.0, "increment": 2.5},
     "молотки": {"main_lift": "bench_press", "scale": 0.20, "min_weight": 4.0, "max_weight": 30.0, "increment": 2.0},
-    "передняя дельта": {"main_lift": "bench_press", "scale": 0.18, "min_weight": 4.0, "max_weight": 25.0,
-                        "increment": 2.0},
-    "махи на среднюю дельту": {"main_lift": "bench_press", "scale": 0.15, "min_weight": 2.0, "max_weight": 25.0,
-                               "increment": 2.0},
-    "отведения на дельты": {"main_lift": "bench_press", "scale": 0.20, "min_weight": 10.0, "max_weight": 35.0,
-                            "increment": 2.0},
-    "подъем на носки в смите": {"main_lift": "squat", "scale": 0.3, "min_weight": 30.0, "max_weight": 100.0,
-                                "increment": 5.0},
-    "сгибание на предплечье": {"main_lift": "bench_press", "scale": 0.6, "min_weight": 25.0, "max_weight": 60.0,
-                               "increment": 2.5},
-    "разгибание на предплечье": {"main_lift": "bench_press", "scale": 0.6, "min_weight": 25.0, "max_weight": 60.0,
-                                 "increment": 2.5},
-    "разгибания ног в тренажере": {"main_lift": "squat", "scale": 0.60, "min_weight": 30.0, "max_weight": 100.0,
-                                   "increment": 5.0},
-    "сгибания ног в тренажере": {"main_lift": "squat", "scale": 0.60, "min_weight": 30.0, "max_weight": 90.0,
-                                 "increment": 5.0},
-    "жим гантелей лёжа 30°": {"main_lift": "bench_press", "scale": 0.30, "min_weight": 10.0, "max_weight": 50.0,
-                              "increment": 2.0}
+    "передняя дельта": {"main_lift": "bench_press", "scale": 0.18, "min_weight": 4.0, "max_weight": 25.0, "increment": 2.0},
+    "махи на среднюю дельту": {"main_lift": "bench_press", "scale": 0.15, "min_weight": 2.0, "max_weight": 25.0, "increment": 2.0},
+    "отведения на дельты": {"main_lift": "bench_press", "scale": 0.20, "min_weight": 10.0, "max_weight": 35.0, "increment": 2.0},
+    "подъем на носки в смите": {"main_lift": "squat", "scale": 0.3, "min_weight": 30.0, "max_weight": 100.0, "increment": 5.0},
+    "сгибание на предплечье": {"main_lift": "bench_press", "scale": 0.6, "min_weight": 25.0, "max_weight": 60.0, "increment": 2.5},
+    "разгибание на предплечье": {"main_lift": "bench_press", "scale": 0.6, "min_weight": 25.0, "max_weight": 60.0, "increment": 2.5},
+    "разгибания ног в тренажере": {"main_lift": "squat", "scale": 0.60, "min_weight": 30.0, "max_weight": 100.0, "increment": 5.0},
+    "сгибания ног в тренажере": {"main_lift": "squat", "scale": 0.60, "min_weight": 30.0, "max_weight": 90.0, "increment": 5.0},
+    "жим гантелей лёжа 30°": {"main_lift": "bench_press", "scale": 0.30, "min_weight": 10.0, "max_weight": 50.0, "increment": 2.0}
 }
+
 # Функция для расчёта веса
 def calculate_weight(max_lift: float, intensity: str, exercise: str) -> str:
     """Рассчитывает вес на основе максимума, интенсивности и упражнения с фиксированными процентами."""
@@ -414,11 +407,8 @@ def calculate_weight(max_lift: float, intensity: str, exercise: str) -> str:
         return "Ошибка расчёта веса"
 
 # Функция для форматирования программы тренировок
-async def format_workout_plan(week: int = None, user_id: int = None) -> str:
-    """Форматирует план тренировок для указанной недели или всех недель."""
-    if week is not None and not 1 <= week <= 8:
-        return "Ошибка: Неделя должна быть от 1 до 8."
-
+async def format_workout_plan(user_id: int, week: int, day: str) -> str:
+    """Форматирует план тренировок для указанной недели и дня."""
     user_data = load_user_data(user_id)
     logger.info(f"Извлечены данные для пользователя {user_id}: {user_data}")
 
@@ -429,33 +419,24 @@ async def format_workout_plan(week: int = None, user_id: int = None) -> str:
     }
     logger.info(f"Максимальные веса для пользователя {user_id}: {max_weights}")
 
-    result = "**Программа тренировок**\n\n"
-    if week:
-        result += f"**Неделя {week}**\n"
-        week_df = df[df['неделя'] == week]
-    else:
-        week_df = df
+    result = f"**Программа тренировок на {day.capitalize()}, Неделя {week}**\n\n"
+    week_day_df = df[(df['неделя'] == week) & (df['день'] == day)]
 
-    if week_df.empty:
-        return f"Ошибка: Данные для недели {week} не найдены."
+    if week_day_df.empty:
+        return f"Ошибка: Данные для недели {week}, дня {day} не найдены."
 
-    days = ['понедельник', 'среда', 'пятница']
-    for day in days:
-        day_df = week_df[week_df['день'] == day]
-        if not day_df.empty:
-            result += f"\n*{day.capitalize()}*\n"
-            for _, row in day_df.iterrows():
-                exercise = row['упражнения']
-                intensity = row['интенсивность']
-                reps = row['подходы х повторения']
+    for _, row in week_day_df.iterrows():
+        exercise = row['упражнения']
+        intensity = row['интенсивность']
+        reps = row['подходы х повторения']
 
-                # Определяем базовый вес для упражнения
-                mapping = EXERCISE_MAPPING.get(exercise.lower(), {"main_lift": "bench_press", "scale": 0.3})
-                main_lift = mapping["main_lift"]
-                max_lift = max_weights.get(main_lift, 0.0)
+        # Определяем базовый вес для упражнения
+        mapping = EXERCISE_MAPPING.get(exercise.lower(), {"main_lift": "bench_press", "scale": 0.3})
+        main_lift = mapping["main_lift"]
+        max_lift = max_weights.get(main_lift, 0.0)
 
-                weight = calculate_weight(max_lift, intensity, exercise) if max_lift > 0 else "Введите максимальные веса (/сбросить)"
-                result += f"- {exercise}: {intensity.capitalize()} ({reps}, {weight})\n"
+        weight = calculate_weight(max_lift, intensity, exercise) if max_lift > 0 else "Введите максимальные веса (/сбросить)"
+        result += f"- {exercise}: {intensity.capitalize()} ({reps}, {weight})\n"
 
     return result
 
@@ -662,8 +643,9 @@ async def reset_button(message: Message, state: FSMContext):
 # Обработчик команды /неделя
 @router.message(Command("неделя"))
 async def week_command(message: Message, state: FSMContext):
-    """Отображает клавиатуру для выбора недели."""
+    """Отображает inline-клавиатуру с выбором недели."""
     try:
+        await state.clear()
         await message.answer(
             "Выбери неделю для тренировки:",
             reply_markup=get_week_keyboard()
@@ -678,6 +660,29 @@ async def week_command(message: Message, state: FSMContext):
 async def week_button(message: Message, state: FSMContext):
     """Обрабатывает нажатие кнопки 'неделя'."""
     await week_command(message, state)
+
+# Обработчик callback для выбора недели
+@router.callback_query(lambda c: c.data.startswith("week_"))
+async def process_week_callback(callback: CallbackQuery, state: FSMContext):
+    """Обрабатывает выбор недели и запрашивает день."""
+    try:
+        week = int(callback.data.split("_")[1])
+        await state.update_data(selected_week=week)
+        await state.set_state(MaxLiftForm.week_selection)
+        await callback.message.edit_text(
+            f"Выбрана неделя {week}. Выбери день для тренировки:",
+            reply_markup=None
+        )
+        await callback.message.answer(
+            "Выбери день:",
+            reply_markup=get_days_only_keyboard()
+        )
+        logger.info(f"Пользователь {callback.from_user.id} выбрал неделю {week}")
+    except Exception as e:
+        logger.error(f"Ошибка в process_week_callback для пользователя {callback.from_user.id}: {e}")
+        await callback.message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
+    finally:
+        await callback.answer()
 
 # Обработчик команды /помощь
 @router.message(Command("помощь"))
@@ -699,27 +704,80 @@ async def help_button(message: Message):
     """Обрабатывает нажатие кнопки 'помощь'."""
     await help_command(message)
 
-# Обработчик нажатий на кнопки недель
-@router.callback_query(lambda c: c.data.startswith('week_'))
-async def process_week_callback(callback: CallbackQuery):
-    """Обрабатывает выбор недели через инлайн-кнопки."""
+# Обработчик кнопки "понедельник"
+@router.message(MaxLiftForm.week_selection, lambda message: message.text == "понедельник")
+async def monday_button(message: Message, state: FSMContext):
+    """Обрабатывает нажатие кнопки 'понедельник'."""
     try:
-        week_number = int(callback.data.split('_')[1])
-        workout_plan = await format_workout_plan(week=week_number, user_id=callback.from_user.id)
-        await callback.message.answer(
+        data = await state.get_data()
+        week = data.get("selected_week")
+        if not week:
+            await message.answer("Ошибка: неделя не выбрана. Используй кнопку 'неделя'.", reply_markup=get_reply_command_keyboard())
+            return
+        workout_plan = await format_workout_plan(user_id=message.from_user.id, week=week, day="понедельник")
+        await message.answer(
             workout_plan,
-            reply_markup=get_week_keyboard()
+            reply_markup=get_days_only_keyboard()
         )
-        await callback.answer()
-        logger.info(f"Пользователь {callback.from_user.id} выбрал неделю {week_number}")
-    except ValueError:
-        await callback.message.answer("Ошибка: Неверный формат номера недели.", reply_markup=get_reply_command_keyboard())
-        logger.warning(f"Пользователь {callback.from_user.id} вызвал ValueError в callback недели")
-        await callback.answer()
+        logger.info(f"Пользователь {message.from_user.id} запросил программу на понедельник, неделя {week}")
     except Exception as e:
-        logger.error(f"Ошибка в process_week_callback для пользователя {callback.from_user.id}: {e}")
-        await callback.message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
-        await callback.answer()
+        logger.error(f"Ошибка в monday_button для пользователя {message.from_user.id}: {e}")
+        await message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
+
+# Обработчик кнопки "среда"
+@router.message(MaxLiftForm.week_selection, lambda message: message.text == "среда")
+async def wednesday_button(message: Message, state: FSMContext):
+    """Обрабатывает нажатие кнопки 'среда'."""
+    try:
+        data = await state.get_data()
+        week = data.get("selected_week")
+        if not week:
+            await message.answer("Ошибка: неделя не выбрана. Используй кнопку 'неделя'.", reply_markup=get_reply_command_keyboard())
+            return
+        workout_plan = await format_workout_plan(user_id=message.from_user.id, week=week, day="среда")
+        await message.answer(
+            workout_plan,
+            reply_markup=get_days_only_keyboard()
+        )
+        logger.info(f"Пользователь {message.from_user.id} запросил программу на среду, неделя {week}")
+    except Exception as e:
+        logger.error(f"Ошибка в wednesday_button для пользователя {message.from_user.id}: {e}")
+        await message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
+
+# Обработчик кнопки "пятница"
+@router.message(MaxLiftForm.week_selection, lambda message: message.text == "пятница")
+async def friday_button(message: Message, state: FSMContext):
+    """Обрабатывает нажатие кнопки 'пятница'."""
+    try:
+        data = await state.get_data()
+        week = data.get("selected_week")
+        if not week:
+            await message.answer("Ошибка: неделя не выбрана. Используй кнопку 'неделя'.", reply_markup=get_reply_command_keyboard())
+            return
+        workout_plan = await format_workout_plan(user_id=message.from_user.id, week=week, day="пятница")
+        await message.answer(
+            workout_plan,
+            reply_markup=get_days_only_keyboard()
+        )
+        logger.info(f"Пользователь {message.from_user.id} запросил программу на пятницу, неделя {week}")
+    except Exception as e:
+        logger.error(f"Ошибка в friday_button для пользователя {message.from_user.id}: {e}")
+        await message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
+
+# Обработчик кнопки "Назад"
+@router.message(MaxLiftForm.week_selection, lambda message: message.text == "Назад")
+async def back_button(message: Message, state: FSMContext):
+    """Обрабатывает нажатие кнопки 'Назад' для возврата к главному меню."""
+    try:
+        await state.clear()
+        await message.answer(
+            "Выбери действие:",
+            reply_markup=get_reply_command_keyboard()
+        )
+        logger.info(f"Пользователь {message.from_user.id} вернулся к главному меню")
+    except Exception as e:
+        logger.error(f"Ошибка в back_button для пользователя {message.from_user.id}: {e}")
+        await message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
 
 # Основная функция для запуска бота
 async def main():
