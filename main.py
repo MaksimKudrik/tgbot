@@ -12,6 +12,8 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import CallbackQuery
+from openpyxl import load_workbook
+import csv
 
 # Настройка логирования
 logging.basicConfig(
@@ -31,12 +33,13 @@ if not API_TOKEN:
 # Инициализация бота
 bot = Bot(token=API_TOKEN)
 storage = MemoryStorage()
-dp = Dispatcher(storage=storage)
+dp = Dispatcher(bot=bot, storage=storage)
 router = Router()
 dp.include_router(router)
 
 # Путь к базе данных SQLite
 DB_PATH = 'gym_bot.db'
+
 
 # Инициализация базы данных
 def init_db():
@@ -57,6 +60,7 @@ def init_db():
     except sqlite3.Error as e:
         logger.error(f"Ошибка при инициализации базы данных: {e}")
         raise
+
 
 # Функции для работы с базой данных
 def save_user_data(user_id: int, data: dict) -> None:
@@ -79,6 +83,7 @@ def save_user_data(user_id: int, data: dict) -> None:
         logger.error(f"Ошибка при сохранении данных пользователя {user_id}: {e}")
         raise
 
+
 def load_user_data(user_id: int) -> dict:
     """Загружает данные пользователя из базы данных."""
     try:
@@ -97,6 +102,7 @@ def load_user_data(user_id: int) -> dict:
         logger.error(f"Ошибка при загрузке данных пользователя {user_id}: {e}")
         return {'bench_press': 0.0, 'squat': 0.0, 'deadlift': 0.0}
 
+
 def clear_user_data(user_id: int) -> None:
     """Очищает данные пользователя в базе данных."""
     try:
@@ -109,6 +115,7 @@ def clear_user_data(user_id: int) -> None:
         logger.error(f"Ошибка при очистке данных пользователя {user_id}: {e}")
         raise
 
+
 # Создание reply-клавиатуры для команд
 def get_reply_command_keyboard() -> ReplyKeyboardMarkup:
     """Создаёт reply-клавиатуру с кнопками для команд."""
@@ -119,9 +126,10 @@ def get_reply_command_keyboard() -> ReplyKeyboardMarkup:
             [KeyboardButton(text="помощь")]
         ],
         resize_keyboard=True,
-        persistent=True
+        is_persistent=True
     )
     return keyboard
+
 
 # Создание reply-клавиатуры с днями и кнопкой "Назад"
 def get_days_only_keyboard() -> ReplyKeyboardMarkup:
@@ -132,9 +140,10 @@ def get_days_only_keyboard() -> ReplyKeyboardMarkup:
             [KeyboardButton(text="Назад")]
         ],
         resize_keyboard=True,
-        persistent=True
+        is_persistent=True
     )
     return keyboard
+
 
 # Создание inline-клавиатуры для выбора недели
 def get_week_keyboard() -> InlineKeyboardMarkup:
@@ -145,6 +154,7 @@ def get_week_keyboard() -> InlineKeyboardMarkup:
     ])
     return keyboard
 
+
 # Определение машины состояний для ввода максимальных весов и выбора недели
 class MaxLiftForm(StatesGroup):
     bench_press = State()
@@ -152,197 +162,53 @@ class MaxLiftForm(StatesGroup):
     deadlift = State()
     week_selection = State()
 
-# Данные из файла в формате CSV
-CSV_DATA = """упражнения,интенсивность,подходы х повторения,день,неделя
-жим лёжа,средняя,5х8-12,понедельник,1
-тяга вертикального блока,средняя,5х8-12,понедельник,1
-шраги с гантелями,легкая,3х8-12,понедельник,1
-косичка,средняя,5х8-12,понедельник,1
-сгибания на бицепс ez грифа,средняя,5х8-12,понедельник,1
-молотки,легкая,3х8-12,понедельник,1
-передняя дельта,легкая,3х12-15,понедельник,1
-сгибание на предплечье,средняя,4х8-12,понедельник,1
-присед со штангой,легкая,3х6-8,среда,1
-классическая тяга,средняя,5х6-8,среда,1
-разгибания ног в тренажере,легкая,3х8-12,среда,1
-сгибания ног в тренажере,легкая,3х8-12,среда,1
-махи на среднюю дельту,средняя,5х8-12,среда,1
-отведения на дельты,легкая,3х8-12,среда,1
-разгибание на предплечье,средняя,4х8-12,среда,1
-жим штанги,легкая,3х6-8,пятница,1
-жим гантелей лёжа 30°,легкая,3х8-12,пятница,1
-тяга горизонтального блока,средняя,5х8-12,пятница,1
-подъем на бицепс с прямым грифом,легкая,3х12-15,пятница,1
-подъем на носки в смите,легкая,3х12-15,пятница,1
-сгибание на предплечье,средняя,4х8-12,пятница,1
-французский жим лёжа,легкая,3х8-12,пятница,1
-разгибание на предплечье,средняя,4х8-12,пятница,1
-жим лёжа,тяжелая,7х8-12,понедельник,2
-тяга вертикального блока,тяжелая,7х8-12,понедельник,2
-шраги с гантелями,средняя,5х8-12,понедельник,2
-косичка,средняя,5х8-12,понедельник,2
-сгибания на бицепс ez грифа,средняя,5х8-12,понедельник,2
-молотки,средняя,5х8-12,понедельник,2
-передняя дельта,легкая,3х12-15,понедельник,2
-сгибание на предплечье,средняя,4х8-12,понедельник,2
-присед со штангой,средняя,5х6-8,среда,2
-классическая тяга,тяжелая,7х6-8,среда,2
-разгибания ног в тренажере,тяжелая,6х8-12,среда,2
-сгибания ног в тренажере,средняя,5х8-12,среда,2
-махи на среднюю дельту,легкая,3х8-12,среда,2
-отведения на дельты,тяжелая,5х8-12,среда,2
-разгибание на предплечье,средняя,4х8-12,среда,2
-жим штанги,легкая,3х6-8,пятница,2
-жим гантелей лёжа 30°,тяжелая,7х8-12,пятница,2
-тяга горизонтального блока,тяжелая,7х8-12,пятница,2
-подъем на бицепс с прямым грифом,средняя,4х12-15,пятница,2
-подъем на носки в смите,средняя,5х12-15,пятница,2
-сгибание на предплечье,средняя,4х8-12,пятница,2
-французский жим лёжа,легкая,3х8-12,пятница,2
-разгибание на предплечье,средняя,4х8-12,пятница,2
-жим лёжа,средняя,5х8-12,понедельник,3
-тяга вертикального блока,легкая,4х8-12,понедельник,3
-шраги с гантелями,тяжелая,7х8-12,понедельник,3
-косичка,тяжелая,7х8-12,понедельник,3
-сгибания на бицепс ez грифа,тяжелая,7х8-12,понедельник,3
-молотки,средняя,5х8-12,понедельник,3
-передняя дельта,тяжелая,6х12-15,понедельник,3
-сгибание на предплечье,средняя,4х8-12,понедельник,3
-присед со штангой,тяжелая,7х6-8,среда,3
-классическая тяга,средняя,5х6-8,среда,3
-разгибания ног в тренажере,средняя,4х8-12,среда,3
-сгибания ног в тренажере,тяжелая,6х8-12,среда,3
-махи на среднюю дельту,тяжелая,7х8-12,среда,3
-отведения на дельты,средняя,5х8-12,среда,3
-разгибание на предплечье,средняя,4х8-12,среда,3
-жим штанги,легкая,3х6-8,пятница,3
-жим гантелей лёжа 30°,тяжелая,7х8-12,пятница,3
-тяга горизонтального блока,тяжелая,7х8-12,пятница,3
-подъем на бицепс с прямым грифом,средняя,4х12-15,пятница,3
-подъем на носки в смите,средняя,5х8-12,пятница,3
-сгибание на предплечье,средняя,4х8-12,пятница,3
-французский жим лёжа,легкая,3х8-12,пятница,3
-разгибание на предплечье,средняя,4х8-12,пятница,3
-жим лёжа,средняя,5х8-12,понедельник,4
-тяга вертикального блока,средняя,5х8-12,понедельник,4
-шраги с гантелями,тяжелая,7х8-12,понедельник,4
-косичка,средняя,5х8-12,понедельник,4
-сгибания на бицепс ez грифа,средняя,5х8-12,понедельник,4
-молотки,тяжелая,6х8-12,понедельник,4
-передняя дельта,тяжелая,6х12-15,понедельник,4
-сгибание на предплечье,средняя,4х8-12,понедельник,4
-присед со штангой,легкая,3х6-8,среда,4
-классическая тяга,тяжелая,7х6-8,среда,4
-разгибания ног в тренажере,тяжелая,6х8-12,среда,4
-сгибания ног в тренажере,средняя,5х8-12,среда,4
-махи на среднюю дельту,средняя,5х8-12,среда,4
-отведения на дельты,тяжелая,6х8-12,среда,4
-разгибание на предплечье,средняя,4х8-12,среда,4
-жим штанги,легкая,3х6-8,пятница,4
-жим гантелей лёжа 30°,средняя,5х8-12,пятница,4
-тяга горизонтального блока,тяжелая,7х8-12,пятница,4
-подъем на бицепс с прямым грифом,средняя,4х12-15,пятница,4
-подъем на носки в смите,средняя,4х12-15,пятница,4
-сгибание на предплечье,средняя,4х8-12,пятница,4
-французский жим лёжа,легкая,3х8-12,пятница,4
-разгибание на предплечье,средняя,4х8-12,пятница,4
-жим лёжа,тяжелая,8х8-12,понедельник,5
-тяга вертикального блока,средняя,6х8-12,понедельник,5
-шраги с гантелями,тяжелая,8х8-12,понедельник,5
-косичка,средняя,5х8-12,понедельник,5
-сгибания на бицепс ez грифа,тяжелая,8х8-12,понедельник,5
-молотки,средняя,5х8-12,понедельник,5
-передняя дельта,тяжелая,7х8-12,понедельник,5
-сгибание на предплечье,средняя,5х8-12,понедельник,5
-присед со штангой,средняя,5х6-8,среда,5
-классическая тяга,средняя,6х6-8,среда,5
-разгибания ног в тренажере,средняя,5х8-12,среда,5
-сгибания ног в тренажере,тяжелая,8х8-12,среда,5
-махи на среднюю дельту,средняя,6х8-12,среда,5
-отведения на дельты,тяжелая,7х8-12,среда,5
-разгибание на предплечье,средняя,5х8-12,среда,5
-жим штанги,легкая,3х6-8,пятница,5
-жим гантелей лёжа 30°,средняя,6х8-12,пятница,5
-тяга горизонтального блока,средняя,6х8-12,пятница,5
-подъем на бицепс с прямым грифом,тяжелая,6х12-15,пятница,5
-подъем на носки в смите,средняя,5х12-15,пятница,5
-сгибание на предплечье,средняя,5х8-12,пятница,5
-французский жим лёжа,легкая,3х8-12,пятница,5
-разгибание на предплечье,средняя,5х8-12,пятница,5
-жим лёжа,средняя,6х8-12,понедельник,6
-тяга вертикального блока,тяжелая,8х8-12,понедельник,6
-шраги с гантелями,средняя,6х8-12,понедельник,6
-косичка,тяжелая,7х8-12,понедельник,6
-сгибания на бицепс ez грифа,средняя,6х8-12,понедельник,6
-молотки,тяжелая,7х8-12,понедельник,6
-передняя дельта,средняя,5х12-15,понедельник,6
-сгибание на предплечье,тяжелая,6х8-12,понедельник,6
-присед со штангой,тяжелая,7х6-8,среда,6
-классическая тяга,средняя,6х6-8,среда,6
-разгибания ног в тренажере,средняя,5х8-12,среда,6
-сгибания ног в тренажере,средняя,5х8-12,среда,6
-махи на среднюю дельту,тяжелая,8х8-12,среда,6
-отведения на дельты,тяжелая,7х8-12,среда,6
-разгибание на предплечье,тяжелая,6х8-12,среда,6
-жим штанги,легкая,3х6-8,пятница,6
-жим гантелей лёжа 30°,средняя,6х8-12,пятница,6
-тяга горизонтального блока,средняя,6х8-12,пятница,6
-подъем на бицепс с прямым грифом,тяжелая,7х12-15,пятница,6
-подъем на носки в смите,средняя,5х8-12,пятница,6
-сгибание на предплечье,тяжелая,6х8-12,пятница,6
-французский жим лёжа,легкая,3х8-12,пятница,6
-разгибание на предплечье,средняя,5х8-12,пятница,6
-жим лёжа,тяжелая,8х8-12,понедельник,7
-тяга вертикального блока,тяжелая,8х8-12,понедельник,7
-шраги с гантелями,средняя,6х8-12,понедельник,7
-косичка,средняя,6х8-12,понедельник,7
-сгибания на бицепс ez грифа,средняя,6х8-12,понедельник,7
-молотки,тяжелая,8х8-12,понедельник,7
-передняя дельта,средняя,5х12-15,понедельник,7
-сгибание на предплечье,средняя,5х8-12,понедельник,7
-присед со штангой,легкая,3х6-8,среда,7
-классическая тяга,средняя,6х6-8,среда,7
-разгибания ног в тренажере,тяжелая,8х8-12,среда,7
-сгибания ног в тренажере,тяжелая,8х8-12,среда,7
-махи на среднюю дельту,средняя,6х8-12,среда,7
-отведения на дельты,тяжелая,7х8-12,среда,7
-разгибание на предплечье,тяжелая,6х8-12,среда,7
-жим штанги,легкая,3х6-8,пятница,7
-жим гантелей лёжа 30°,средняя,6х8-12,пятница,7
-тяга горизонтального блока,средняя,6х8-12,пятница,7
-подъем на бицепс с прямым грифом,тяжелая,7х12-15,пятница,7
-подъем на носки в смите,тяжелая,7х8-12,пятница,7
-сгибание на предплечье,тяжелая,6х8-12,пятница,7
-французский жим лёжа,легкая,3х8-12,пятница,7
-разгибание на предплечье,средняя,5х8-12,пятница,7
-жим лёжа,средняя,6х8-12,понедельник,8
-тяга вертикального блока,тяжелая,8х8-12,понедельник,8
-шраги с гантелями,средняя,6х8-12,понедельник,8
-косичка,тяжелая,8х8-12,понедельник,8
-сгибания на бицепс ez грифа,тяжелая,8х8-12,понедельник,8
-молотки,средняя,6х8-12,понедельник,8
-передняя дельта,средняя,5х8-12,понедельник,8
-сгибание на предплечье,средняя,5х8-12,понедельник,8
-присед со штангой,средняя,6х6-8,среда,8
-классическая тяга,средняя,6х6-8,среда,8
-разгибания ног в тренажере,средняя,6х8-12,среда,8
-сгибания ног в тренажере,средняя,6х8-12,среда,8
-махи на среднюю дельту,тяжелая,8х8-12,среда,8
-отведения на дельты,тяжелая,7х8-12,среда,8
-разгибание на предплечье,тяжелая,7х8-12,среда,8
-жим штанги,легкая,3х6-8,пятница,8
-жим гантелей лёжа 30°,тяжелая,8х8-12,пятница,8
-тяга горизонтального блока,средняя,6х8-12,пятница,8
-подъем на бицепс с прямым грифом,тяжелая,7х12-15,пятница,8
-подъем на носки в смите,средняя,5х8-12,пятница,8
-сгибание на предплечье,тяжелая,7х8-12,пятница,8
-французский жим лёжа,легкая,3х8-12,пятница,8
-разгибание на предплечье,средняя,5х8-12,пятница,8
-"""
 
-# Преобразование данных в DataFrame
+def csv_from_excel():
+    """Конвертирует Excel-файл 'Муж высокий 3дневный.xlsx' в CSV с правильной структурой."""
+    excel_file = 'training.xlsx'
+    if not os.path.exists(excel_file):
+        logger.error(f"Файл {excel_file} не найден")
+        raise FileNotFoundError(f"Файл {excel_file} не найден")
+
+    # Загружаем Excel-файл
+    wb = load_workbook(excel_file)
+    sheet = wb.active
+
+    # Подготовка данных для CSV
+    data = []
+    current_week = None
+    current_day = None
+
+    for row in sheet.iter_rows(min_row=1, values_only=True):
+        if not any(row):  # Пропускаем пустые строки
+            continue
+        if isinstance(row[0], str) and row[0].startswith('неделя'):
+            current_week = int(row[0].split()[1])
+            continue
+        if row[0] in ['понедельник', 'среда', 'пятница']:
+            current_day = row[0]
+            continue
+        if row[0] and current_week and current_day:
+            exercise = row[0]
+            intensity = row[1] if row[1] else 'средняя'  # Значение по умолчанию для интенсивности
+            reps = row[2] if row[2] else '3х8-12'  # Значение по умолчанию для подходов
+            # Исправляем опечатку
+            exercise = 'передняя дельта' if exercise == 'прередняя дельта' else exercise
+            data.append([current_week, current_day, exercise, intensity, reps])
+
+    # Записываем данные в CSV
+    with open('training.csv', 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(['неделя', 'день', 'упражнения', 'интенсивность', 'подходы х повторения'])
+        writer.writerows(data)
+
+    logger.info(f"Файл {excel_file} успешно конвертирован в training.csv")
+
+
+# Загрузка данных из CSV
 try:
-    df = pd.read_csv(StringIO(CSV_DATA))
+    csv_from_excel()
+    df = pd.read_csv('training.csv', encoding='utf-8')
     logger.info("CSV данные успешно загружены")
 except Exception as e:
     logger.error(f"Ошибка при чтении CSV данных: {e}")
@@ -351,26 +217,45 @@ except Exception as e:
 # Маппинг упражнений для расчёта весов
 EXERCISE_MAPPING = {
     "жим лёжа": {"main_lift": "bench_press", "scale": 1.0, "min_weight": 20.0, "max_weight": 500.0, "increment": 2.5},
-    "присед со штангой": {"main_lift": "squat", "scale": 1.0, "min_weight": 20.0, "max_weight": 600.0, "increment": 2.5},
-    "классическая тяга": {"main_lift": "deadlift", "scale": 1.0, "min_weight": 20.0, "max_weight": 700.0, "increment": 2.5},
-    "тяга вертикального блока": {"main_lift": "bench_press", "scale": 0.55, "min_weight": 10.0, "max_weight": 120.0, "increment": 2.5},
-    "тяга горизонтального блока": {"main_lift": "bench_press", "scale": 0.55, "min_weight": 10.0, "max_weight": 120.0, "increment": 2.5},
-    "шраги с гантелями": {"main_lift": "deadlift", "scale": 0.20, "min_weight": 4.0, "max_weight": 80.0, "increment": 2.0},
+    "присед со штангой": {"main_lift": "squat", "scale": 1.0, "min_weight": 20.0, "max_weight": 600.0,
+                          "increment": 2.5},
+    "классическая тяга": {"main_lift": "deadlift", "scale": 1.0, "min_weight": 20.0, "max_weight": 700.0,
+                          "increment": 2.5},
+    "тяга вертикального блока": {"main_lift": "bench_press", "scale": 0.55, "min_weight": 10.0, "max_weight": 120.0,
+                                 "increment": 2.5},
+    "тяга горизонтального блока": {"main_lift": "bench_press", "scale": 0.55, "min_weight": 10.0, "max_weight": 120.0,
+                                   "increment": 2.5},
+    "шраги с гантелями": {"main_lift": "deadlift", "scale": 0.20, "min_weight": 4.0, "max_weight": 80.0,
+                          "increment": 2.0},
     "косичка": {"main_lift": "bench_press", "scale": 0.50, "min_weight": 5.0, "max_weight": 50.0, "increment": 2.5},
-    "французский жим лёжа": {"main_lift": "bench_press", "scale": 0.25, "min_weight": 10.0, "max_weight": 60.0, "increment": 2.5},
-    "сгибания на бицепс ez грифа": {"main_lift": "bench_press", "scale": 0.35, "min_weight": 5.0, "max_weight": 50.0, "increment": 2.5},
-    "подъем на бицепс с прямым грифом": {"main_lift": "bench_press", "scale": 0.3, "min_weight": 10.0, "max_weight": 50.0, "increment": 2.5},
+    "французский жим лёжа": {"main_lift": "bench_press", "scale": 0.25, "min_weight": 10.0, "max_weight": 60.0,
+                             "increment": 2.5},
+    "сгибания на бицепс ez грифа": {"main_lift": "bench_press", "scale": 0.35, "min_weight": 5.0, "max_weight": 50.0,
+                                    "increment": 2.5},
+    "подъем на бицепс с прямым грифом": {"main_lift": "bench_press", "scale": 0.3, "min_weight": 10.0,
+                                         "max_weight": 50.0, "increment": 2.5},
     "молотки": {"main_lift": "bench_press", "scale": 0.20, "min_weight": 4.0, "max_weight": 30.0, "increment": 2.0},
-    "передняя дельта": {"main_lift": "bench_press", "scale": 0.18, "min_weight": 4.0, "max_weight": 25.0, "increment": 2.0},
-    "махи на среднюю дельту": {"main_lift": "bench_press", "scale": 0.15, "min_weight": 2.0, "max_weight": 25.0, "increment": 2.0},
-    "отведения на дельты": {"main_lift": "bench_press", "scale": 0.20, "min_weight": 10.0, "max_weight": 35.0, "increment": 2.0},
-    "подъем на носки в смите": {"main_lift": "squat", "scale": 0.3, "min_weight": 30.0, "max_weight": 100.0, "increment": 5.0},
-    "сгибание на предплечье": {"main_lift": "bench_press", "scale": 0.6, "min_weight": 25.0, "max_weight": 60.0, "increment": 2.5},
-    "разгибание на предплечье": {"main_lift": "bench_press", "scale": 0.6, "min_weight": 25.0, "max_weight": 60.0, "increment": 2.5},
-    "разгибания ног в тренажере": {"main_lift": "squat", "scale": 0.60, "min_weight": 30.0, "max_weight": 100.0, "increment": 5.0},
-    "сгибания ног в тренажере": {"main_lift": "squat", "scale": 0.60, "min_weight": 30.0, "max_weight": 90.0, "increment": 5.0},
-    "жим гантелей лёжа 30°": {"main_lift": "bench_press", "scale": 0.30, "min_weight": 10.0, "max_weight": 50.0, "increment": 2.0}
+    "передняя дельта": {"main_lift": "bench_press", "scale": 0.18, "min_weight": 4.0, "max_weight": 25.0,
+                        "increment": 2.0},
+    "махи на среднюю дельту": {"main_lift": "bench_press", "scale": 0.15, "min_weight": 2.0, "max_weight": 25.0,
+                               "increment": 2.0},
+    "отведения на дельты": {"main_lift": "bench_press", "scale": 0.20, "min_weight": 10.0, "max_weight": 35.0,
+                            "increment": 2.0},
+    "подъем на носки в смите": {"main_lift": "squat", "scale": 0.3, "min_weight": 30.0, "max_weight": 100.0,
+                                "increment": 5.0},
+    "сгибание на предплечье": {"main_lift": "bench_press", "scale": 0.6, "min_weight": 25.0, "max_weight": 60.0,
+                               "increment": 2.5},
+    "разгибание на предплечье": {"main_lift": "bench_press", "scale": 0.6, "min_weight": 25.0, "max_weight": 60.0,
+                                 "increment": 2.5},
+    "разгибания ног в тренажере": {"main_lift": "squat", "scale": 0.60, "min_weight": 30.0, "max_weight": 100.0,
+                                   "increment": 5.0},
+    "сгибания ног в тренажере": {"main_lift": "squat", "scale": 0.60, "min_weight": 30.0, "max_weight": 90.0,
+                                 "increment": 5.0},
+    "жим гантелей лёжа 30°": {"main_lift": "bench_press", "scale": 0.30, "min_weight": 10.0, "max_weight": 50.0,
+                              "increment": 2.0},
+    "жим штанги": {"main_lift": "bench_press", "scale": 1.0, "min_weight": 20.0, "max_weight": 500.0, "increment": 2.5}
 }
+
 
 # Функция для расчёта веса
 def calculate_weight(max_lift: float, intensity: str, exercise: str) -> str:
@@ -394,17 +279,17 @@ def calculate_weight(max_lift: float, intensity: str, exercise: str) -> str:
             weight = base_weight * 0.60
         elif intensity == "средняя":
             weight = base_weight * 0.70
-        elif intensity == "тяжелая":
+        elif intensity == "тяжёлая" or intensity == "тяжелая":  # Учитываем возможные варианты написания
             weight = base_weight * 0.80
         else:
             return "Не указан вес (неизвестная интенсивность)"
 
-        # Ограничение веса и округление
         weight = max(min_weight, min(max_weight, round(weight / increment) * increment))
         return f"{weight:.1f} кг"
     except Exception as e:
         logger.error(f"Ошибка при расчёте веса для упражнения {exercise}: {e}")
         return "Ошибка расчёта веса"
+
 
 # Функция для форматирования программы тренировок
 async def format_workout_plan(user_id: int, week: int, day: str) -> str:
@@ -430,15 +315,16 @@ async def format_workout_plan(user_id: int, week: int, day: str) -> str:
         intensity = row['интенсивность']
         reps = row['подходы х повторения']
 
-        # Определяем базовый вес для упражнения
         mapping = EXERCISE_MAPPING.get(exercise.lower(), {"main_lift": "bench_press", "scale": 0.3})
         main_lift = mapping["main_lift"]
         max_lift = max_weights.get(main_lift, 0.0)
 
-        weight = calculate_weight(max_lift, intensity, exercise) if max_lift > 0 else "Введите максимальные веса (/сбросить)"
+        weight = calculate_weight(max_lift, intensity,
+                                  exercise) if max_lift > 0 else "Введите максимальные веса (/сбросить)"
         result += f"- {exercise}: {intensity.capitalize()} ({reps}, {weight})\n"
 
     return result
+
 
 # Валидация ввода веса
 def validate_weight(text: str) -> tuple[bool, float, str]:
@@ -453,6 +339,7 @@ def validate_weight(text: str) -> tuple[bool, float, str]:
     except ValueError:
         return False, 0.0, "Введите число (например, 100) или 'пропустить'."
 
+
 # Обработчик команды /start
 @router.message(CommandStart())
 async def start_command(message: Message, state: FSMContext):
@@ -466,6 +353,7 @@ async def start_command(message: Message, state: FSMContext):
     except Exception as e:
         logger.error(f"Ошибка в start_command для пользователя {message.from_user.id}: {e}")
         await message.answer("Произошла ошибка. Попробуйте снова с /start.")
+
 
 # Обработчик команды /cancel
 @router.message(Command("cancel"))
@@ -482,7 +370,9 @@ async def cancel_command(message: Message, state: FSMContext):
         logger.info(f"Пользователь {message.from_user.id} отменил ввод весов")
     except Exception as e:
         logger.error(f"Ошибка в cancel_command для пользователя {message.from_user.id}: {e}")
-        await message.answer("Произошла ошибка при отмене. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
+        await message.answer("Произошла ошибка при отмене. Попробуйте снова.",
+                             reply_markup=get_reply_command_keyboard())
+
 
 # Обработчик ввода максимума в жиме лёжа
 @router.message(MaxLiftForm.bench_press)
@@ -514,6 +404,7 @@ async def process_bench_press(message: Message, state: FSMContext):
         logger.error(f"Ошибка в process_bench_press для пользователя {message.from_user.id}: {e}")
         await message.answer("Произошла ошибка. Попробуйте снова или используй /cancel.")
 
+
 # Обработчик ввода максимума в приседе
 @router.message(MaxLiftForm.squat)
 async def process_squat(message: Message, state: FSMContext):
@@ -543,6 +434,7 @@ async def process_squat(message: Message, state: FSMContext):
     except Exception as e:
         logger.error(f"Ошибка в process_squat для пользователя {message.from_user.id}: {e}")
         await message.answer("Произошла ошибка. Попробуйте снова или используй /cancel.")
+
 
 # Обработчик ввода максимума в становой тяге
 @router.message(MaxLiftForm.deadlift)
@@ -587,6 +479,7 @@ async def process_deadlift(message: Message, state: FSMContext):
         logger.error(f"Ошибка в process_deadlift для пользователя {message.from_user.id}: {e}")
         await message.answer("Произошла ошибка. Попробуйте снова или используй /cancel.")
 
+
 # Обработчик команды /результаты
 @router.message(Command("результаты"))
 async def my_weights_command(message: Message, state: FSMContext):
@@ -612,13 +505,16 @@ async def my_weights_command(message: Message, state: FSMContext):
         logger.info(f"Пользователь {message.from_user.id} запросил текущие веса: {user_data}")
     except Exception as e:
         logger.error(f"Ошибка в my_weights_command для пользователя {message.from_user.id}: {e}")
-        await message.answer("Произошла ошибка при получении весов. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
+        await message.answer("Произошла ошибка при получении весов. Попробуйте снова.",
+                             reply_markup=get_reply_command_keyboard())
+
 
 # Обработчик кнопки "результаты"
 @router.message(lambda message: message.text == "результаты")
 async def my_weights_button(message: Message, state: FSMContext):
     """Обрабатывает нажатие кнопки 'результаты'."""
     await my_weights_command(message, state)
+
 
 # Обработчик команды /сбросить
 @router.message(Command("сбросить"))
@@ -627,18 +523,22 @@ async def reset_command(message: Message, state: FSMContext):
     try:
         await state.clear()
         clear_user_data(message.from_user.id)
-        await message.answer("Максимальные веса сброшены. Введи свой максимальный вес в жиме лёжа (в кг) или 'пропустить':")
+        await message.answer(
+            "Максимальные веса сброшены. Введи свой максимальный вес в жиме лёжа (в кг) или 'пропустить':")
         await state.set_state(MaxLiftForm.bench_press)
         logger.info(f"Пользователь {message.from_user.id} сбросил максимальные веса")
     except Exception as e:
         logger.error(f"Ошибка в reset_command для пользователя {message.from_user.id}: {e}")
-        await message.answer("Произошла ошибка при сбросе весов. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
+        await message.answer("Произошла ошибка при сбросе весов. Попробуйте снова.",
+                             reply_markup=get_reply_command_keyboard())
+
 
 # Обработчик кнопки "сбросить"
 @router.message(lambda message: message.text == "сбросить")
 async def reset_button(message: Message, state: FSMContext):
     """Обрабатывает нажатие кнопки 'сбросить'."""
     await reset_command(message, state)
+
 
 # Обработчик команды /неделя
 @router.message(Command("неделя"))
@@ -655,11 +555,13 @@ async def week_command(message: Message, state: FSMContext):
         logger.error(f"Ошибка в week_command для пользователя {message.from_user.id}: {e}")
         await message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
 
+
 # Обработчик кнопки "неделя"
 @router.message(lambda message: message.text == "неделя")
 async def week_button(message: Message, state: FSMContext):
     """Обрабатывает нажатие кнопки 'неделя'."""
     await week_command(message, state)
+
 
 # Обработчик callback для выбора недели
 @router.callback_query(lambda c: c.data.startswith("week_"))
@@ -684,6 +586,7 @@ async def process_week_callback(callback: CallbackQuery, state: FSMContext):
     finally:
         await callback.answer()
 
+
 # Обработчик команды /помощь
 @router.message(Command("помощь"))
 async def help_command(message: Message):
@@ -696,13 +599,16 @@ async def help_command(message: Message):
         logger.info(f"Пользователь {message.from_user.id} запросил помощь")
     except Exception as e:
         logger.error(f"Ошибка в help_command для пользователя {message.from_user.id}: {e}")
-        await message.answer("Произошла ошибка при отображении помощи. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
+        await message.answer("Произошла ошибка при отображении помощи. Попробуйте снова.",
+                             reply_markup=get_reply_command_keyboard())
+
 
 # Обработчик кнопки "помощь"
 @router.message(lambda message: message.text == "помощь")
 async def help_button(message: Message):
     """Обрабатывает нажатие кнопки 'помощь'."""
     await help_command(message)
+
 
 # Обработчик кнопки "понедельник"
 @router.message(MaxLiftForm.week_selection, lambda message: message.text == "понедельник")
@@ -712,7 +618,8 @@ async def monday_button(message: Message, state: FSMContext):
         data = await state.get_data()
         week = data.get("selected_week")
         if not week:
-            await message.answer("Ошибка: неделя не выбрана. Используй кнопку 'неделя'.", reply_markup=get_reply_command_keyboard())
+            await message.answer("Ошибка: неделя не выбрана. Используй кнопку 'неделя'.",
+                                 reply_markup=get_reply_command_keyboard())
             return
         workout_plan = await format_workout_plan(user_id=message.from_user.id, week=week, day="понедельник")
         await message.answer(
@@ -724,6 +631,7 @@ async def monday_button(message: Message, state: FSMContext):
         logger.error(f"Ошибка в monday_button для пользователя {message.from_user.id}: {e}")
         await message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
 
+
 # Обработчик кнопки "среда"
 @router.message(MaxLiftForm.week_selection, lambda message: message.text == "среда")
 async def wednesday_button(message: Message, state: FSMContext):
@@ -732,7 +640,8 @@ async def wednesday_button(message: Message, state: FSMContext):
         data = await state.get_data()
         week = data.get("selected_week")
         if not week:
-            await message.answer("Ошибка: неделя не выбрана. Используй кнопку 'неделя'.", reply_markup=get_reply_command_keyboard())
+            await message.answer("Ошибка: неделя не выбрана. Используй кнопку 'неделя'.",
+                                 reply_markup=get_reply_command_keyboard())
             return
         workout_plan = await format_workout_plan(user_id=message.from_user.id, week=week, day="среда")
         await message.answer(
@@ -744,6 +653,7 @@ async def wednesday_button(message: Message, state: FSMContext):
         logger.error(f"Ошибка в wednesday_button для пользователя {message.from_user.id}: {e}")
         await message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
 
+
 # Обработчик кнопки "пятница"
 @router.message(MaxLiftForm.week_selection, lambda message: message.text == "пятница")
 async def friday_button(message: Message, state: FSMContext):
@@ -752,7 +662,8 @@ async def friday_button(message: Message, state: FSMContext):
         data = await state.get_data()
         week = data.get("selected_week")
         if not week:
-            await message.answer("Ошибка: неделя не выбрана. Используй кнопку 'неделя'.", reply_markup=get_reply_command_keyboard())
+            await message.answer("Ошибка: неделя не выбрана. Используй кнопку 'неделя'.",
+                                 reply_markup=get_reply_command_keyboard())
             return
         workout_plan = await format_workout_plan(user_id=message.from_user.id, week=week, day="пятница")
         await message.answer(
@@ -763,6 +674,7 @@ async def friday_button(message: Message, state: FSMContext):
     except Exception as e:
         logger.error(f"Ошибка в friday_button для пользователя {message.from_user.id}: {e}")
         await message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
+
 
 # Обработчик кнопки "Назад"
 @router.message(MaxLiftForm.week_selection, lambda message: message.text == "Назад")
@@ -779,19 +691,19 @@ async def back_button(message: Message, state: FSMContext):
         logger.error(f"Ошибка в back_button для пользователя {message.from_user.id}: {e}")
         await message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
 
+
 # Основная функция для запуска бота
 async def main():
     """Запускает бота и инициализирует базу данных."""
     try:
         init_db()
+        await bot.delete_webhook(drop_pending_updates=True)
         logger.info("Бот запущен...")
         await dp.start_polling(bot)
     except Exception as e:
         logger.error(f"Ошибка при запуске бота: {e}")
         raise
-    finally:
-        await dp.storage.close()
-        await bot.session.close()
+
 
 if __name__ == "__main__":
     asyncio.run(main())
