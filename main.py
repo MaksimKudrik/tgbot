@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import pandas as pd
 from aiogram import Bot, Dispatcher, Router
 from aiogram.filters import Command, CommandStart
-from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, ReplyKeyboardMarkup, KeyboardButton
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
@@ -123,13 +123,27 @@ def get_week_keyboard() -> InlineKeyboardMarkup:
         keyboard.inline_keyboard.append(row)
     return keyboard
 
+# Создание reply-клавиатуры для команд
+def get_reply_command_keyboard() -> ReplyKeyboardMarkup:
+    """Создаёт reply-клавиатуру с кнопками для команд."""
+    keyboard = ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="неделя")],
+            [KeyboardButton(text="результаты"), KeyboardButton(text="сбросить")],
+            [KeyboardButton(text="помощь")]
+        ],
+        resize_keyboard=True,
+        persistent=True
+    )
+    return keyboard
+
 # Определение машины состояний для ввода максимальных весов
 class MaxLiftForm(StatesGroup):
     bench_press = State()
     squat = State()
     deadlift = State()
 
-# Данные из файла в формате CSV (из предыдущего Excel)
+# Данные из файла в формате CSV
 CSV_DATA = """упражнения,интенсивность,подходы х повторения,день,неделя
 жим лёжа,средняя,5х8-12,понедельник,1
 тяга вертикального блока,средняя,5х8-12,понедельник,1
@@ -341,7 +355,7 @@ EXERCISE_MAPPING = {
     "косичка": {"main_lift": "bench_press", "scale": 0.50, "min_weight": 5.0, "max_weight": 50.0, "increment": 2.5},
     "французский жим лёжа": {"main_lift": "bench_press", "scale": 0.25, "min_weight": 10.0, "max_weight": 60.0,
                              "increment": 2.5},
-    "сгибания на бицепс ez грифа": {"main_lift": "bench_press", "scale": 0.25, "min_weight": 5.0, "max_weight": 50.0,
+    "сгибания на бицепс ez грифа": {"main_lift": "bench_press", "scale": 0.35, "min_weight": 5.0, "max_weight": 50.0,
                                     "increment": 2.5},
     "подъем на бицепс с прямым грифом": {"main_lift": "bench_press", "scale": 0.3, "min_weight": 10.0,
                                          "max_weight": 50.0, "increment": 2.5},
@@ -363,10 +377,9 @@ EXERCISE_MAPPING = {
     "сгибания ног в тренажере": {"main_lift": "squat", "scale": 0.60, "min_weight": 30.0, "max_weight": 90.0,
                                  "increment": 5.0},
     "жим гантелей лёжа 30°": {"main_lift": "bench_press", "scale": 0.30, "min_weight": 10.0, "max_weight": 50.0,
-                              "increment": 2.0},
+                              "increment": 2.0}
 }
-
-# Функция для расчёта веса (обновлена для фиксированных процентов)
+# Функция для расчёта веса
 def calculate_weight(max_lift: float, intensity: str, exercise: str) -> str:
     """Рассчитывает вес на основе максимума, интенсивности и упражнения с фиксированными процентами."""
     try:
@@ -441,7 +454,7 @@ async def format_workout_plan(week: int = None, user_id: int = None) -> str:
                 main_lift = mapping["main_lift"]
                 max_lift = max_weights.get(main_lift, 0.0)
 
-                weight = calculate_weight(max_lift, intensity, exercise) if max_lift > 0 else "Введите максимальные веса (/reset)"
+                weight = calculate_weight(max_lift, intensity, exercise) if max_lift > 0 else "Введите максимальные веса (/сбросить)"
                 result += f"- {exercise}: {intensity.capitalize()} ({reps}, {weight})\n"
 
     return result
@@ -480,24 +493,15 @@ async def cancel_command(message: Message, state: FSMContext):
     try:
         current_state = await state.get_state()
         if current_state is None:
-            await message.answer("Нет активного процесса ввода весов.")
+            await message.answer("Нет активного процесса ввода весов.", reply_markup=get_reply_command_keyboard())
             logger.info(f"Пользователь {message.from_user.id} попытался отменить, но не было активного состояния")
             return
         await state.clear()
-        await message.answer(
-            "Ввод весов отменён. Выбери неделю или используй команды:\n"
-            "- /start — начать ввод весов\n"
-            "- /workout — полный план тренировок\n"
-            "- /week — выбрать неделю\n"
-            "- /my_weights — проверить текущие веса\n"
-            "- /reset — сбросить и ввести новые веса\n"
-            "- /help — список всех команд",
-            reply_markup=get_week_keyboard()
-        )
+        await message.answer("Ввод весов отменён. Выбери действие:", reply_markup=get_reply_command_keyboard())
         logger.info(f"Пользователь {message.from_user.id} отменил ввод весов")
     except Exception as e:
         logger.error(f"Ошибка в cancel_command для пользователя {message.from_user.id}: {e}")
-        await message.answer("Произошла ошибка при отмене. Попробуйте снова.")
+        await message.answer("Произошла ошибка при отмене. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
 
 # Обработчик ввода максимума в жиме лёжа
 @router.message(MaxLiftForm.bench_press)
@@ -510,14 +514,8 @@ async def process_bench_press(message: Message, state: FSMContext):
             save_user_data(message.from_user.id, user_data)
             await state.clear()
             await message.answer(
-                "Вы пропустили ввод весов. План будет без расчёта весов.\n"
-                "Выбери неделю или используй команды:\n"
-                "- /workout — полный план тренировок\n"
-                "- /week — выбрать неделю\n"
-                "- /my_weights — проверить текущие веса\n"
-                "- /reset — ввести максимальные веса\n"
-                "- /help — список всех команд",
-                reply_markup=get_week_keyboard()
+                "Вы пропустили ввод весов. План будет без расчёта весов.\nВыбери действие:",
+                reply_markup=get_reply_command_keyboard()
             )
             logger.info(f"Пользователь {message.from_user.id} пропустил ввод весов")
             return
@@ -546,14 +544,8 @@ async def process_squat(message: Message, state: FSMContext):
             save_user_data(message.from_user.id, user_data)
             await state.clear()
             await message.answer(
-                "Вы пропустили ввод весов. План будет без расчёта весов.\n"
-                "Выбери неделю или используй команды:\n"
-                "- /workout — полный план тренировок\n"
-                "- /week — выбрать неделю\n"
-                "- /my_weights — проверить текущие веса\n"
-                "- /reset — ввести максимальные веса\n"
-                "- /help — список всех команд",
-                reply_markup=get_week_keyboard()
+                "Вы пропустили ввод весов. План будет без расчёта весов.\nВыбери действие:",
+                reply_markup=get_reply_command_keyboard()
             )
             logger.info(f"Пользователь {message.from_user.id} пропустил ввод весов")
             return
@@ -586,13 +578,8 @@ async def process_deadlift(message: Message, state: FSMContext):
                 f"Жим лёжа: {user_data.get('bench_press', 0.0)} кг\n"
                 f"Присед: {user_data.get('squat', 0.0)} кг\n"
                 f"Становая тяга: {user_data.get('deadlift', 0.0)} кг\n"
-                "Выбери неделю или используй команды:\n"
-                "- /workout — полный план тренировок\n"
-                "- /week — выбрать неделю\n"
-                "- /my_weights — проверить текущие веса\n"
-                "- /reset — ввести максимальные веса\n"
-                "- /help — список всех команд",
-                reply_markup=get_week_keyboard()
+                "Выбери действие:",
+                reply_markup=get_reply_command_keyboard()
             )
             logger.info(f"Пользователь {message.from_user.id} пропустил ввод становой тяги. Текущие веса: {user_data}")
             return
@@ -611,21 +598,16 @@ async def process_deadlift(message: Message, state: FSMContext):
             f"Жим лёжа: {user_data['bench_press']} кг\n"
             f"Присед: {user_data['squat']} кг\n"
             f"Становая тяга: {user_data['deadlift']} кг\n"
-            "Выбери неделю или используй команды:\n"
-            "- /workout — полный план тренировок\n"
-            "- /week — выбрать неделю\n"
-            "- /my_weights — проверить текущие веса\n"
-            "- /reset — ввести максимальные веса\n"
-            "- /help — список всех команд",
-            reply_markup=get_week_keyboard()
+            "Выбери действие:",
+            reply_markup=get_reply_command_keyboard()
         )
         logger.info(f"Пользователь {message.from_user.id} завершил ввод весов: {user_data}")
     except Exception as e:
         logger.error(f"Ошибка в process_deadlift для пользователя {message.from_user.id}: {e}")
         await message.answer("Произошла ошибка. Попробуйте снова или используй /cancel.")
 
-# Обработчик команды /my_weights
-@router.message(Command("my_weights"))
+# Обработчик команды /результаты
+@router.message(Command("результаты"))
 async def my_weights_command(message: Message, state: FSMContext):
     """Отображает текущие максимальные веса пользователя."""
     try:
@@ -633,8 +615,8 @@ async def my_weights_command(message: Message, state: FSMContext):
         logger.info(f"Проверка весов для пользователя {message.from_user.id}: {user_data}")
         if not user_data or all(value == 0.0 for value in user_data.values()):
             await message.answer(
-                "Вы ещё не ввели максимальные веса. Используй /start или /reset для ввода.",
-                reply_markup=get_week_keyboard()
+                "Вы ещё не ввели максимальные веса. Используй /сбросить для ввода.",
+                reply_markup=get_reply_command_keyboard()
             )
             logger.info(f"Пользователь {message.from_user.id} запросил веса, но данные отсутствуют")
             return
@@ -643,16 +625,22 @@ async def my_weights_command(message: Message, state: FSMContext):
             f"Жим лёжа: {user_data.get('bench_press', 0.0)} кг\n"
             f"Присед: {user_data.get('squat', 0.0)} кг\n"
             f"Становая тяга: {user_data.get('deadlift', 0.0)} кг\n"
-            "Выбери неделю или используй /reset, чтобы обновить веса.",
-            reply_markup=get_week_keyboard()
+            "Выбери действие:",
+            reply_markup=get_reply_command_keyboard()
         )
         logger.info(f"Пользователь {message.from_user.id} запросил текущие веса: {user_data}")
     except Exception as e:
         logger.error(f"Ошибка в my_weights_command для пользователя {message.from_user.id}: {e}")
-        await message.answer("Произошла ошибка при получении весов. Попробуйте снова.")
+        await message.answer("Произошла ошибка при получении весов. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
 
-# Обработчик команды /reset
-@router.message(Command("reset"))
+# Обработчик кнопки "результаты"
+@router.message(lambda message: message.text == "результаты")
+async def my_weights_button(message: Message, state: FSMContext):
+    """Обрабатывает нажатие кнопки 'результаты'."""
+    await my_weights_command(message, state)
+
+# Обработчик команды /сбросить
+@router.message(Command("сбросить"))
 async def reset_command(message: Message, state: FSMContext):
     """Сбрасывает максимальные веса и начинает ввод заново."""
     try:
@@ -663,26 +651,16 @@ async def reset_command(message: Message, state: FSMContext):
         logger.info(f"Пользователь {message.from_user.id} сбросил максимальные веса")
     except Exception as e:
         logger.error(f"Ошибка в reset_command для пользователя {message.from_user.id}: {e}")
-        await message.answer("Произошла ошибка при сбросе весов. Попробуйте снова.")
+        await message.answer("Произошла ошибка при сбросе весов. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
 
-# Обработчик команды /workout
-@router.message(Command("workout"))
-async def workout_command(message: Message, state: FSMContext):
-    """Отправляет полный план тренировок."""
-    try:
-        workout_plan = await format_workout_plan(user_id=message.from_user.id)
-        if len(workout_plan) > 4096:
-            for i in range(0, len(workout_plan), 4096):
-                await message.answer(workout_plan[i:i+4096], reply_markup=get_week_keyboard())
-        else:
-            await message.answer(workout_plan, reply_markup=get_week_keyboard())
-        logger.info(f"Пользователь {message.from_user.id} запросил полный план тренировок")
-    except Exception as e:
-        logger.error(f"Ошибка в workout_command для пользователя {message.from_user.id}: {e}")
-        await message.answer("Произошла ошибка при получении плана тренировок. Попробуйте позже.")
+# Обработчик кнопки "сбросить"
+@router.message(lambda message: message.text == "сбросить")
+async def reset_button(message: Message, state: FSMContext):
+    """Обрабатывает нажатие кнопки 'сбросить'."""
+    await reset_command(message, state)
 
-# Обработчик команды /week
-@router.message(Command("week"))
+# Обработчик команды /неделя
+@router.message(Command("неделя"))
 async def week_command(message: Message, state: FSMContext):
     """Отображает клавиатуру для выбора недели."""
     try:
@@ -693,7 +671,33 @@ async def week_command(message: Message, state: FSMContext):
         logger.info(f"Пользователь {message.from_user.id} запросил выбор недели")
     except Exception as e:
         logger.error(f"Ошибка в week_command для пользователя {message.from_user.id}: {e}")
-        await message.answer("Произошла ошибка. Попробуйте снова.")
+        await message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
+
+# Обработчик кнопки "неделя"
+@router.message(lambda message: message.text == "неделя")
+async def week_button(message: Message, state: FSMContext):
+    """Обрабатывает нажатие кнопки 'неделя'."""
+    await week_command(message, state)
+
+# Обработчик команды /помощь
+@router.message(Command("помощь"))
+async def help_command(message: Message):
+    """Отображает список доступных команд."""
+    try:
+        await message.answer(
+            "Выбери действие из доступных команд:",
+            reply_markup=get_reply_command_keyboard()
+        )
+        logger.info(f"Пользователь {message.from_user.id} запросил помощь")
+    except Exception as e:
+        logger.error(f"Ошибка в help_command для пользователя {message.from_user.id}: {e}")
+        await message.answer("Произошла ошибка при отображении помощи. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
+
+# Обработчик кнопки "помощь"
+@router.message(lambda message: message.text == "помощь")
+async def help_button(message: Message):
+    """Обрабатывает нажатие кнопки 'помощь'."""
+    await help_command(message)
 
 # Обработчик нажатий на кнопки недель
 @router.callback_query(lambda c: c.data.startswith('week_'))
@@ -709,34 +713,13 @@ async def process_week_callback(callback: CallbackQuery):
         await callback.answer()
         logger.info(f"Пользователь {callback.from_user.id} выбрал неделю {week_number}")
     except ValueError:
-        await callback.message.answer("Ошибка: Неверный формат номера недели.", reply_markup=get_week_keyboard())
+        await callback.message.answer("Ошибка: Неверный формат номера недели.", reply_markup=get_reply_command_keyboard())
         logger.warning(f"Пользователь {callback.from_user.id} вызвал ValueError в callback недели")
         await callback.answer()
     except Exception as e:
         logger.error(f"Ошибка в process_week_callback для пользователя {callback.from_user.id}: {e}")
-        await callback.message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_week_keyboard())
+        await callback.message.answer("Произошла ошибка. Попробуйте снова.", reply_markup=get_reply_command_keyboard())
         await callback.answer()
-
-# Обработчик команды /help
-@router.message(Command("help"))
-async def help_command(message: Message):
-    """Отображает список доступных команд."""
-    try:
-        await message.answer(
-            "Доступные команды:\n"
-            "/start — Запустить бота и ввести максимальные веса\n"
-            "/workout — Получить полный план тренировок\n"
-            "/week — Выбрать неделю для тренировки (используй кнопки)\n"
-            "/my_weights — Проверить текущие максимальные веса\n"
-            "/reset — Сбросить максимальные веса и ввести новые\n"
-            "/cancel — Отменить текущий ввод весов\n"
-            "/help — Показать это сообщение",
-            reply_markup=get_week_keyboard()
-        )
-        logger.info(f"Пользователь {message.from_user.id} запросил помощь")
-    except Exception as e:
-        logger.error(f"Ошибка в help_command для пользователя {message.from_user.id}: {e}")
-        await message.answer("Произошла ошибка при отображении помощи. Попробуйте снова.")
 
 # Основная функция для запуска бота
 async def main():
